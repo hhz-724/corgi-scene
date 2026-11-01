@@ -79,6 +79,7 @@ canvas{display:block}
 </script>
 <script type="module">
 import * as THREE from 'three';
+window.__sceneReady = true;
 
 const ORANGE = 0xf0a868, ORANGE_D = 0xe08a4a, CREAM = 0xfff6ee;
 const SKIN = 0xf7d3b6, HAIR = 0x5a3d2e, HOOD = 0x8fb6a2;
@@ -358,10 +359,14 @@ function buildCorgi(){
   // 眼睛
   const eyes = [];
   for (const x of [-.145, .145]){
+    const eyeG = new THREE.Group();
+    eyeG.position.set(x, .06, .3);
     const e = sphere(.055, M.dark, 1, 1.05, .8);
-    e.position.set(x, .06, .3); head.add(e); eyes.push(e);
+    eyeG.add(e);
     const hl = sphere(.017, M.bulb, 1,1,1);
-    hl.position.set(x+.018, .08, .335); head.add(hl);
+    hl.position.set(.018, .02, .035);
+    eyeG.add(hl);
+    head.add(eyeG); eyes.push(eyeG);
   }
   // 腮红
   for (const x of [-.225, .225]){
@@ -564,7 +569,6 @@ function animate(){
     corgi.position.y = Math.abs(Math.sin(t*14))*.17;
     corgi.userData.tail.rotation.z = Math.sin(t*22)*.6;
     corgi.userData.head.rotation.z = Math.sin(t*10)*.08;
-    human.userData.handAnim = true;
   } else {
     corgi.position.y += (0 - corgi.position.y) * .12;
     corgi.userData.head.rotation.z += (0 - corgi.userData.head.rotation.z) * .1;
@@ -575,15 +579,14 @@ function animate(){
 
   // 眨眼
   blinkAt -= dt;
-  if (blinkAt <= 0){ blinkT = .12; blinkAt = 2.4 + Math.random()*2.6; }
+  if (blinkAt <= 0){ blinkT = .14; blinkAt = 2.4 + Math.random()*2.6; }
+  let eyeY = 1;
   if (blinkT > 0){
     blinkT -= dt;
-    const k = Math.max(.12, Math.abs(blinkT/.12 - .5)*2);
-    corgi.userData.eyes.forEach(e => e.scale.y = .055 * (blinkT > 0 ? .25 : 1));
-    corgi.userData.eyes.forEach(e => { e.scale.y = .25; });
-  } else {
-    corgi.userData.eyes.forEach(e => e.scale.y = 1);
+    // 0 -> 1 -> 0 的闭眼曲线
+    eyeY = Math.max(.1, Math.abs(blinkT/.14 - .5) * 2);
   }
+  corgi.userData.eyes.forEach(e => { e.scale.y = eyeY; });
 
   // 爱心
   for (let i=hearts.length-1;i>=0;i--){
@@ -622,6 +625,10 @@ addEventListener('resize', () => {
 
 animate();
 document.getElementById('loading').classList.add('hide');
+window.addEventListener('error', function(){
+  var l = document.getElementById('loading');
+  if (l) { l.classList.remove('hide'); l.textContent = '加载失败，请刷新试试'; }
+});
 setTimeout(() => { spawnHeart(new THREE.Vector3(.85, 1.5, .3), 4); }, 900);
 </script>
 </body>
