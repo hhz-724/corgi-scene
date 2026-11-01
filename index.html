@@ -510,122 +510,133 @@ function buildCorgi(){
   const body = new THREE.Group();
   g.add(body);
 
-  /* 后腿 + 圆屁股 */
+  /* ---------- 身体 ---------- */
+  const TR = {cx:0, cy:.55, cz:-.02, rx:.44, ry:.41, rz:.45};
+  /* 后腿 / 屁股 */
   for (const s of [-1,1]){
-    body.add(put(ball(.21,C.furA,1,1,1.02,18), s*.275, .29, -.12));
-    body.add(put(ball(.15,C.cream,1,.78,1.2,16), s*.275, .11, .04));
+    body.add(put(ball(.2,C.furA,1,1,1.02,18), s*.265,.28,-.12));
+    body.add(put(ball(.145,C.cream,1,.78,1.2,16), s*.265,.11,.04));
   }
-  body.add(put(ball(.27,C.cream,1.04,1,.84,20), 0, .40, -.31));
+  body.add(put(ball(.26,C.cream,1.04,1,.84,20), 0,.38,-.30));
 
-  /* 身体 */
-  const TR = {cx:0, cy:.56, cz:-.02, rx:.458, ry:.422, rz:.466};
-  const torso = ball(.44,C.furA,1.04,.96,1.06,28);
-  torso.position.set(0,.56,-.02); ink(torso,1.034); body.add(torso);
-  const belly = ball(.37,C.cream,1,.98,.85,24);
-  belly.position.set(0,.50,.16); body.add(belly);
-  body.add(put(ball(.22,C.furA,1,1,1,20), 0, .90, .05));
+  const torso = ball(.42,C.furA,1.05,.98,1.07,28);
+  torso.position.set(0,.55,-.02); ink(torso,1.032); body.add(torso);
 
-  /* 前腿 + 小肉垫 */
+  /* 白肚皮（凸出前侧） */
+  body.add(put(ball(.30,C.cream,1,.98,.9,24), 0,.47,.16));
+  /* 白胸毛 */
+  body.add(put(ball(.19,C.cream,1,1.15,.62,20), 0,.63,.30));
+  /* 脖子 */
+  body.add(put(ball(.21,C.furA,1,1,1,20), 0,.88,.04));
+
+  /* ---------- 前腿 + 小肉垫 ---------- */
   for (const s of [-1,1]){
-    const l = new THREE.Mesh(new THREE.CapsuleGeometry(.078,.2,6,14), toon(C.cream));
-    l.position.set(s*.15,.17,.38); l.castShadow = true; body.add(l);
-    body.add(put(ball(.1,C.cream,1,.72,1.18,18), s*.15, .07, .43));
+    const l = new THREE.Mesh(new THREE.CapsuleGeometry(.076,.2,6,14), toon(C.cream));
+    l.position.set(s*.148,.17,.37); l.castShadow = true; body.add(l);
+    body.add(put(ball(.098,C.cream,1,.72,1.18,18), s*.148,.068,.42));
     for (let i=-1;i<=1;i++){
-      body.add(put(ball(.024,C.pinkD,1,.8,1,8), s*.15+i*.045, .056, .5));
+      body.add(put(ball(.023,C.pinkD,1,.8,1,8), s*.148+i*.044,.055,.492));
     }
   }
 
-  /* 绒球尾巴 */
-  const tail = new THREE.Group(); tail.position.set(0,.62,-.56);
-  tail.add(ball(.145,C.cream,1,1,1.02,18));
-  tail.add(put(ball(.095,C.cream,1,1,1,14), 0, .13, -.05));
+  /* ---------- 绒球尾巴 ---------- */
+  const tail = new THREE.Group(); tail.position.set(0,.60,-.55);
+  tail.add(ball(.14,C.cream,1,1,1.02,18));
+  tail.add(put(ball(.092,C.cream,1,1,1,14), 0,.13,-.05));
   body.add(tail);
 
   /* ---------- 头 ---------- */
   const head = new THREE.Group();
-  head.position.set(0,1.14,.05);
+  head.position.set(0,1.13,.04);
   body.add(head);
 
-  const HD = {cx:0, cy:0, cz:0, rx:.3975, ry:.371, rz:.356};
-  const skull = ball(.375,C.furA,1.06,.99,.95,32); ink(skull,1.026); head.add(skull);
-  /* 蓬松脸颊 */
-  for (const s of [-1,1]) head.add(put(ball(.19,C.furA,1,1,.92,18), s*.255, -.055, .04));
+  const HR = {cx:0, cy:0, cz:0, rx:.417, ry:.389, rz:.374};   // 头骨椭球
+  const skull = ball(.40,C.furA,1.043,.973,.935,34);
+  ink(skull,1.022); head.add(skull);
 
-  /* 白色面罩（后移，避免盖住眼睛） */
-  const mask = ball(.285,C.cream,1,.93,.86,26); mask.position.set(0,-.075,.05); head.add(mask);
+  /* 蓬松脸颊（向外凸） */
+  for (const s of [-1,1]) head.add(put(ball(.175,C.furA,1.08,.94,.9,20), s*.275,-.055,.03));
 
-  /* 口鼻 */
-  const MZ = {cx:0, cy:-.145, cz:.27, rx:.174, ry:.132, rz:.15};
-  const muzzle = ball(.15,C.cream,1.16,.88,1,22); muzzle.position.set(0,-.145,.27); head.add(muzzle);
+  /* 白色额头竖纹（凸出表面） */
+  head.add(put(ball(.245,C.cream,.48,1.22,.95,22), 0,.055,.155));
+  /* 白色口鼻 */
+  const MZ = {cx:0, cy:-.175, cz:.285, rx:.177, ry:.123, rz:.165};
+  head.add(put(ball(.15,C.cream,1.18,.82,1.1,24), MZ.cx, MZ.cy, MZ.cz));
+  /* 白下巴 */
+  head.add(put(ball(.135,C.cream,1.15,.9,1,20), 0,-.245,.24));
 
-  /* 鼻子 + 高光 */
-  const nz = surfZ(MZ.cx,MZ.cy,MZ.cz,MZ.rx,MZ.ry,MZ.rz, 0, -.06) + .012;
-  head.add(put(ball(.048,C.ink,1.3,.85,.9,16), 0, -.06, nz));
-  head.add(put(ball(.012,0xffffff,1,1,1,8), -.016, -.038, nz+.035));
+  /* 鼻子 */
+  const nz = surfZ(MZ.cx,MZ.cy,MZ.cz,MZ.rx,MZ.ry,MZ.rz, 0, -.062);
+  head.add(put(ball(.052,C.ink,1.32,.86,.92,16), 0, -.062, nz+.005));
+  head.add(put(ball(.013,0xffffff,1,1,1,8), -.017, -.038, nz+.042));
 
   /* ω 嘴 */
   for (const s of [-1,1]){
-    const arc = new THREE.Mesh(new THREE.TorusGeometry(.032,.01,6,14,Math.PI), toon(C.ink));
-    const az = surfZ(MZ.cx,MZ.cy,MZ.cz,MZ.rx,MZ.ry,MZ.rz, s*.032, -.175) + .004;
-    arc.position.set(s*.032,-.175,az);
+    const arc = new THREE.Mesh(new THREE.TorusGeometry(.033,.0105,6,14,Math.PI), toon(C.ink));
+    const az = surfZ(MZ.cx,MZ.cy,MZ.cz,MZ.rx,MZ.ry,MZ.rz, s*.033, -.19);
+    arc.position.set(s*.033,-.19,az+.004);
     arc.rotation.z = s>0 ? Math.PI : 0;
     head.add(arc);
   }
 
   /* 舌头 */
-  const tz = surfZ(MZ.cx,MZ.cy,MZ.cz,MZ.rx,MZ.ry,MZ.rz, 0, -.215) + .01;
-  const tongue = ball(.048,C.pinkD,1,1.25,.55,14); tongue.position.set(0,-.222,tz); head.add(tongue);
+  const tongue = ball(.05,C.pinkD,1,1.25,.55,14);
+  const tz = surfZ(MZ.cx,MZ.cy,MZ.cz,MZ.rx,MZ.ry,MZ.rz, 0, -.215);
+  tongue.position.set(0,-.235,tz+.006);
+  head.add(tongue);
 
-  /* 眼睛：大圆眼 + 双高光 */
+  /* ---------- 眼睛：大圆眼 + 双高光 ---------- */
   const eyes = [];
   for (const s of [-1,1]){
-    const ez = surfZ(HD.cx,HD.cy,HD.cz,HD.rx,HD.ry,HD.rz, s*.148, .045) + .012;
+    const ez = surfZ(HR.cx,HR.cy,HR.cz,HR.rx,HR.ry,HR.rz, s*.162, .062);
     const eyeG = new THREE.Group();
-    eyeG.position.set(s*.148,.045,ez);
-    eyeG.add(ball(.078,C.ink,1,1.12,.5,20));
-    eyeG.add(put(ball(.026,0xffffff,1,1,1,10), s*.02, .036, .04));
-    eyeG.add(put(ball(.013,0xffffff,1,1,1,8), -s*.024,-.022,.04));
+    eyeG.position.set(s*.162,.062,ez+.006);
+    eyeG.add(ball(.092,C.ink,1,1.08,.44,20));
+    eyeG.add(put(ball(.03,0xffffff,1,1,1,10), s*.022,.038,.038));
+    eyeG.add(put(ball(.015,0xffffff,1,1,1,8), -s*.026,-.024,.038));
     head.add(eyeG); eyes.push(eyeG);
   }
 
   /* 小眉毛 */
   for (const s of [-1,1]){
-    const bz = surfZ(HD.cx,HD.cy,HD.cz,HD.rx,HD.ry,HD.rz, s*.145, .163) + .004;
-    const brow = cube(.052,.013,.012,C.furB);
-    brow.position.set(s*.145,.163,bz); brow.rotation.z = s*.2; head.add(brow);
+    const bz = surfZ(HR.cx,HR.cy,HR.cz,HR.rx,HR.ry,HR.rz, s*.15, .168);
+    const brow = cube(.054,.013,.012,C.furB);
+    brow.position.set(s*.15,.168,bz-.006);
+    brow.rotation.z = s*.22;
+    head.add(brow);
   }
 
-  /* 腮红：贴在脸颊表面 */
+  /* 腮红 */
   for (const s of [-1,1]){
-    const cz = surfZ(HD.cx,HD.cy,HD.cz,HD.rx,HD.ry,HD.rz, s*.242, -.085);
-    head.add(put(ball(.072,C.blush,1,.72,.32,14), s*.242,-.085,cz-.004));
+    const cz = surfZ(HR.cx,HR.cy,HR.cz,HR.rx,HR.ry,HR.rz, s*.262, -.055);
+    head.add(put(ball(.075,C.blush,1,.72,.34,14), s*.262,-.055,cz+.004));
   }
 
-  /* 大耳朵 */
+  /* ---------- 大耳朵 ---------- */
   const ears = [];
   for (const s of [-1,1]){
     const ear = new THREE.Group();
-    ear.position.set(s*.215,.285,-.03);
-    ear.rotation.z = s*.2; ear.rotation.x = -.1;
-    const outer = cone(.148,.38,C.furA,20); outer.position.y = .17; ink(outer,1.045); ear.add(outer);
-    ear.add(put(ball(.05,C.furA,1,1,1,12), 0, .365, 0));
-    ear.add(put(cone(.092,.27,C.earIn,16), 0, .15, .048));
+    ear.position.set(s*.225,.29,-.03);
+    ear.rotation.z = s*.21; ear.rotation.x = -.09;
+    const outer = cone(.152,.40,C.furA,22); outer.position.y = .18; ink(outer,1.042); ear.add(outer);
+    ear.add(put(ball(.052,C.furA,1,1,1,12), 0,.385,0));
+    ear.add(put(cone(.095,.28,C.earIn,18), 0,.155,.05));
     head.add(ear); ears.push(ear);
   }
 
-  /* 围巾 + 小蝴蝶结 */
-  const scarf = new THREE.Mesh(new THREE.TorusGeometry(.225,.058,8,30), toon(C.scarf));
-  scarf.position.set(0,.885,.055);
+  /* ---------- 围巾 + 蝴蝶结 ---------- */
+  const scarf = new THREE.Mesh(new THREE.TorusGeometry(.235,.058,8,30), toon(C.scarf));
+  scarf.position.set(0,.865,.045);
   scarf.rotation.x = Math.PI/2-.18;
   scarf.scale.set(1,1,.92);
   scarf.castShadow = true;
   body.add(scarf);
-  const knotZ = surfZ(TR.cx,TR.cy,TR.cz,TR.rx,TR.ry,TR.rz, 0, .845);
-  body.add(put(ball(.06,C.scarfD,1,1,1,14), 0,.845,knotZ+.02));
+  const knotZ = surfZ(TR.cx,TR.cy,TR.cz,TR.rx,TR.ry,TR.rz, 0, .82);
+  body.add(put(ball(.058,C.scarfD,1,1,1,14), 0,.825,knotZ+.015));
   for (const s of [-1,1]){
     const bow = new THREE.Mesh(new THREE.SphereGeometry(.058,14,10), toon(C.scarfD));
-    bow.scale.set(1.25,.85,.55);
-    bow.position.set(s*.085,.845,knotZ+.02);
+    bow.scale.set(1.3,.85,.55);
+    bow.position.set(s*.082,.825,knotZ+.015);
     bow.rotation.z = s*.25;
     body.add(bow);
   }
