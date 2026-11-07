@@ -3,55 +3,68 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>炸炸炸鸡 &amp; hhz · 像素小房间</title>
+<title>炸炸炸鸡 &amp; hhz · 我们的小房间</title>
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
-html,body{height:100%;overflow:hidden;background:#2a1b13;
-  font-family:"PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",system-ui,sans-serif}
-canvas#gl{display:block;width:100%;height:100%;image-rendering:auto;touch-action:none}
-#vig{position:fixed;inset:0;pointer-events:none;z-index:2;
-  background:radial-gradient(ellipse at 50% 44%,rgba(0,0,0,0) 44%,rgba(38,20,10,.40) 100%)}
-canvas.lbl{position:fixed;left:0;top:0;pointer-events:none;transform:translate(-50%,-100%);
-  opacity:0;transition:opacity .25s;z-index:3;will-change:transform,opacity;
-  filter:drop-shadow(0 4px 10px rgba(60,30,10,.30))}
-canvas.lbl.on{opacity:1}
-canvas#bub{position:fixed;left:0;top:0;pointer-events:none;
-  transform:translate(-50%,-100%) scale(.88);opacity:0;z-index:4;
-  transition:opacity .15s,transform .15s cubic-bezier(.2,.9,.3,1.25);will-change:transform,opacity;
-  filter:drop-shadow(0 8px 20px rgba(60,30,10,.28))}
-canvas#bub.on{opacity:1;transform:translate(-50%,-100%) scale(1)}
-#hud{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:7px;
-  padding:10px 10px calc(14px + env(safe-area-inset-bottom));z-index:6;flex-wrap:wrap}
-#hud button{font-family:inherit;font-size:12.5px;font-weight:800;color:#3a2418;cursor:pointer;
-  background:#ffe6c9;border:0;padding:9px 12px 10px;letter-spacing:.4px;
-  box-shadow:0 -3px 0 0 #c99a6e inset,0 3px 0 0 #c99a6e inset,-3px 0 0 0 #c99a6e inset,3px 0 0 0 #c99a6e inset,0 6px 0 0 #7d5334;
-  transition:transform .08s}
-#hud button:active{transform:translateY(3px);
-  box-shadow:0 -3px 0 0 #c99a6e inset,0 3px 0 0 #c99a6e inset,-3px 0 0 0 #c99a6e inset,3px 0 0 0 #c99a6e inset,0 3px 0 0 #7d5334}
-#hud button.on{background:#ffce8a}
-#top{position:fixed;left:0;right:0;top:calc(8px + env(safe-area-inset-top));z-index:5;
-  display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none}
-#top canvas{display:block}
-#hint{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));
-  text-align:center;font-size:11.5px;font-weight:700;color:rgba(255,231,205,.62);
-  z-index:4;pointer-events:none;transition:opacity .5s;letter-spacing:.3px}
-#boot{position:fixed;inset:0;display:grid;place-items:center;background:#2a1b13;z-index:20;
-  color:#ffd9a8;font-size:13px;font-weight:700;transition:opacity .5s;letter-spacing:1px}
+html,body{height:100%;overflow:hidden;background:#f7e3d0;
+  font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+canvas#gl{display:block;width:100%;height:100%;touch-action:none}
+
+.lbl{position:fixed;left:0;top:0;pointer-events:none;transform:translate(-50%,-100%);
+  font-size:13px;font-weight:600;letter-spacing:.2px;white-space:nowrap;
+  padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.96);color:#5b4034;
+  box-shadow:0 4px 14px rgba(120,80,50,.18),0 0 0 1px rgba(255,255,255,.9) inset;
+  opacity:0;transition:opacity .3s;backdrop-filter:blur(6px)}
+.lbl.on{opacity:1}
+.lbl b{font-weight:800}
+.lbl.dog{color:#b3562a}
+.lbl.man{color:#3d7d5c}
+
+#bub{position:fixed;left:0;top:0;pointer-events:none;transform:translate(-50%,-100%) scale(.86);
+  font-size:14px;font-weight:600;line-height:1.4;white-space:nowrap;
+  padding:10px 15px;border-radius:16px;background:#fff;color:#5b4034;
+  box-shadow:0 8px 24px rgba(120,80,50,.22);opacity:0;
+  transition:opacity .2s,transform .2s;z-index:4}
+#bub.on{opacity:1;transform:translate(-50%,-100%) scale(1)}
+#bub:after{content:'';position:absolute;left:50%;bottom:-6px;width:12px;height:12px;
+  background:#fff;transform:translateX(-50%) rotate(45deg);border-radius:2px}
+
+#top{position:fixed;left:0;right:0;top:calc(14px + env(safe-area-inset-top));z-index:5;
+  text-align:center;pointer-events:none}
+#top h1{font-size:17px;font-weight:800;letter-spacing:.2px;color:#6b4630;
+  text-shadow:0 2px 10px rgba(255,255,255,.8)}
+#top p{font-size:11.5px;color:#8d6a54;margin-top:4px;letter-spacing:.3px;
+  text-shadow:0 1px 8px rgba(255,255,255,.9)}
+
+#hud{position:fixed;left:0;right:0;bottom:0;display:flex;justify-content:center;gap:8px;
+  padding:12px 12px calc(16px + env(safe-area-inset-bottom));z-index:6;flex-wrap:wrap}
+#hud button{font-family:inherit;font-size:13.5px;font-weight:700;color:#7a4e32;cursor:pointer;
+  background:rgba(255,255,255,.94);border:0;border-radius:999px;padding:11px 17px;
+  box-shadow:0 5px 16px rgba(120,80,50,.16),0 0 0 1px rgba(255,255,255,.9) inset;
+  transition:transform .13s,background .2s;backdrop-filter:blur(8px)}
+#hud button:active{transform:scale(.95)}
+#hud button.on{background:#ffd9a8;color:#8a5124}
+
+#hint{position:fixed;left:0;right:0;bottom:calc(70px + env(safe-area-inset-bottom));
+  text-align:center;font-size:11.5px;color:rgba(120,85,60,.55);z-index:4;
+  pointer-events:none;transition:opacity .5s;letter-spacing:.2px}
+#boot{position:fixed;inset:0;display:grid;place-items:center;background:#f7e3d0;z-index:20;
+  color:#a07d64;font-size:13px;font-weight:600;transition:opacity .5s;letter-spacing:.5px}
 #boot.hide{opacity:0;pointer-events:none}
 </style>
 </head>
 <body>
 <canvas id="gl"></canvas>
-<div id="vig"></div>
-<div id="top"><canvas id="titleCv"></canvas><canvas id="subCv"></canvas></div>
-<div id="hint">拖一下换角度 · 点点炸炸炸鸡和 hhz</div>
+<div id="top"><h1>炸炸炸鸡 &amp; hhz</h1><p>我们的小房间 · 拖一下看看别处</p></div>
+<div id="hint">点点炸炸炸鸡或 hhz · 也可以抱抱</div>
 <div id="hud">
   <button id="bHug">抱抱</button>
   <button id="bPet">摸摸炸炸</button>
   <button id="bLight">换个光</button>
-  <button id="bSpin" class="on">环绕</button>
+  <button id="bSpin">环绕</button>
 </div>
-<div id="boot">正在搭小房间…</div>
+<div id="boot">正在布置小房间…</div>
 
 <script type="importmap">
 {"imports":{"three":"./three.module.js"}}
@@ -60,27 +73,24 @@ canvas#bub.on{opacity:1;transform:translate(-50%,-100%) scale(1)}
 import * as THREE from 'three';
 
 /* ================= 渲染 ================= */
-const PIX = 1.0;   /* 1.0 = 全分辨率平滑渲染（迪士尼风） */
 const gl = document.getElementById('gl');
-const renderer = new THREE.WebGLRenderer({canvas:gl, antialias:false, alpha:false});
-renderer.setPixelRatio(1);
+const renderer = new THREE.WebGLRenderer({canvas:gl, antialias:true, alpha:false});
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2.5));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.05;
+renderer.toneMappingExposure = 1.06;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x2a1b13);
-scene.fog = new THREE.Fog(0x3f2c1e, 17, 36);
-const camera = new THREE.PerspectiveCamera(30, 1, .1, 90);
+scene.background = new THREE.Color(0xf6e2ce);
+scene.fog = new THREE.Fog(0xf6e2ce, 13, 30);
+
+const camera = new THREE.PerspectiveCamera(36, 1, .1, 90);
 
 function resize(){
-  const w = Math.max(180, Math.round(innerWidth / PIX));
-  const h = Math.max(200, Math.round(innerHeight / PIX));
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h;
+  renderer.setSize(innerWidth, innerHeight, false);
+  camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
 }
 resize();
@@ -88,879 +98,668 @@ addEventListener('resize', resize);
 
 /* ================= 调色 ================= */
 const C = {
-  ink:0x4a3226,
-  furA:0xf9bd82, furB:0xe89d55, cream:0xfffbf2,
-  earIn:0xffbccb, blush:0xffa2b6, pinkD:0xff7f9e,
-  scarf:0xff94af, scarfD:0xe9708d,
-  skin:0xfbe0c4, hair:0x513729, mint:0xaadabc, mintD:0x88be9e,
-  wood:0xe7c39e, woodD:0xc89c72, metal:0xccb197,
-  leafA:0x84b77c, leafB:0x679e61, pot:0xd98160,
-  rug2:0xffcab1, red:0xd95a51, yellow:0xf0ca89, blue:0x95b9d7, pinkie:0xda8b96
+  fur:0xf7ab63, furD:0xe8913f, furL:0xffc98a, cream:0xfff8ef,
+  pink:0xffb8c4, pinkD:0xff8fa3, nose:0x4a3028, eye:0x3d2a24,
+  skin:0xf9d6bb, hair:0x54382a, mint:0xa8d8bb, mintD:0x87bfa0,
+  wood:0xe8c39a, woodD:0xd2a878, rug:0xffe8d6, rug2:0xffc9ad,
+  leaf:0x86b87c, leafD:0x6b9c63, pot:0xdb8f6d,
+  metal:0xd6bfa6, wall:0xffe6d0, floor:0xe9c49c,
+  red:0xe2605c, yellow:0xf2c96b, blue:0x9dc0dd, purple:0xbda6d6
 };
 
-function gradMap(steps){
-  const d = new Uint8Array(steps);
-  for (let i=0;i<steps;i++) d[i] = Math.round(104 + (i/(steps-1))*151);
-  const t = new THREE.DataTexture(d, steps, 1, THREE.RedFormat);
-  t.minFilter = t.magFilter = THREE.NearestFilter; t.needsUpdate = true;
-  return t;
-}
-const GRAD = gradMap(4);
-const toon = (color, extra) => new THREE.MeshToonMaterial(Object.assign({color, gradientMap:GRAD}, extra || {}));
-const INKMAT = new THREE.MeshBasicMaterial({color:C.ink, side:THREE.BackSide});
-function ink(mesh, k){
-  const m = new THREE.Mesh(mesh.geometry, INKMAT);
-  m.scale.multiplyScalar(k || 1.04);
-  mesh.add(m);
-  return mesh;
-}
-function ball(r, color, sx, sy, sz, seg){
-  sx = sx===undefined?1:sx; sy = sy===undefined?1:sy; sz = sz===undefined?1:sz;
-  seg = seg || 24;
-  const m = new THREE.Mesh(new THREE.SphereGeometry(r, seg, Math.max(12, Math.round(seg*.7))), toon(color));
+const mat = (color, opt) => new THREE.MeshStandardMaterial(Object.assign({
+  color, roughness:.82, metalness:0
+}, opt || {}));
+
+function sph(r, color, sx=1, sy=1, sz=1, seg=32, opt){
+  const m = new THREE.Mesh(new THREE.SphereGeometry(r, seg, Math.round(seg*0.75)), mat(color, opt));
   m.scale.set(sx, sy, sz);
   m.castShadow = true; m.receiveShadow = true;
   return m;
 }
-function cube(w,h,d,color){
-  const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), toon(color));
+function box(w,h,d,color,opt){
+  const m = new THREE.Mesh(new THREE.BoxGeometry(w,h,d), mat(color, opt));
   m.castShadow = true; m.receiveShadow = true;
   return m;
 }
-function cyl(rt,rb,h,color,seg){
-  const m = new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||16), toon(color));
+function cyl(rt,rb,h,color,seg=24,opt){
+  const m = new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg), mat(color,opt));
   m.castShadow = true; m.receiveShadow = true;
   return m;
 }
-function cone(r,h,color,seg){
-  const m = new THREE.Mesh(new THREE.ConeGeometry(r,h,seg||16), toon(color));
-  m.castShadow = true; m.receiveShadow = true;
-  return m;
-}
-function limb(a, b, r, color){
-  const dir = new THREE.Vector3().subVectors(b,a);
-  const m = new THREE.Mesh(new THREE.CapsuleGeometry(r, Math.max(dir.length()-2*r,.01), 6, 14), toon(color));
-  m.position.copy(a).add(b).multiplyScalar(.5);
-  m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir.normalize());
-  m.castShadow = true; m.receiveShadow = true;
-  return m;
-}
-/* 椭球表面 z（保证五官不陷进去） */
-function surfZ(cx, cy, cz, rx, ry, rz, x, y){
-  const nx = (x-cx)/rx, ny = (y-cy)/ry;
-  const k = 1 - nx*nx - ny*ny;
-  return cz + rz*Math.sqrt(Math.max(.02, k));
-}
-function put(obj, x, y, z){
-  obj.position.set(x, y, z);
-  return obj;
+/* 圆润的耳朵：旋转体，顶端收圆 */
+function earGeo(h=0.34, r=0.135){
+  const pts = [];
+  const N = 14;
+  for (let i=0;i<=N;i++){
+    const t = i/N;
+    const y = t*h;
+    const k = Math.pow(1-t, .72);
+    const rad = Math.max(0.004, r*k*(1 + 0.18*Math.sin(t*Math.PI)));
+    pts.push(new THREE.Vector2(rad, y));
+  }
+  return new THREE.LatheGeometry(pts, 24);
 }
 
-/* ================= 灯光 ================= */
-const hemi = new THREE.HemisphereLight(0xfff0dc, 0x8a6142, 1.15);
-scene.add(hemi);
+/* ================= 灯光（柔和棚拍感） ================= */
+scene.add(new THREE.HemisphereLight(0xfff2e2, 0xd9b79a, 1.15));
+const ambient = new THREE.AmbientLight(0xfff0e0, .35);
+scene.add(ambient);
 
-/* 主光：暖，柔，带软阴影 */
-const key = new THREE.DirectionalLight(0xfff0d4, 2.35);
-key.position.set(3.8, 7.0, 5.2);
+const key = new THREE.DirectionalLight(0xffe8cf, 2.5);
+key.position.set(3.6, 6.6, 5.0);
 key.castShadow = true;
-key.shadow.mapSize.set(2048,2048);
-key.shadow.camera.left = -8; key.shadow.camera.right = 8;
-key.shadow.camera.top = 9; key.shadow.camera.bottom = -3;
-key.shadow.camera.near = 1; key.shadow.camera.far = 28;
-key.shadow.bias = -0.0008;
-key.shadow.radius = 4;
-key.shadow.blurSamples = 16;
+key.shadow.mapSize.set(2048, 2048);
+key.shadow.camera.left = -7; key.shadow.camera.right = 7;
+key.shadow.camera.top = 8; key.shadow.camera.bottom = -3;
+key.shadow.camera.near = 1; key.shadow.camera.far = 26;
+key.shadow.bias = -0.0009;
+key.shadow.radius = 3;
 scene.add(key);
 
-/* 补光：冷，压暗部避免死黑 */
-const fill = new THREE.DirectionalLight(0xcfe0ff, .70);
-fill.position.set(-5.5, 3.2, -2.4);
-scene.add(fill);
-
-/* 轮廓光：让毛发边缘透亮 */
-const rim = new THREE.DirectionalLight(0xffcf9c, .85);
-rim.position.set(-1.6, 3.2, 6.0);
+const rim = new THREE.DirectionalLight(0xbfd4ff, .85);
+rim.position.set(-4.5, 3.8, -4.0);
 scene.add(rim);
 
-/* 环境反射：柔和丝绒感 */
-const lampLight = new THREE.PointLight(0xffc48a, 5.5, 14, 2);
-lampLight.position.set(2.4, 2.0, -0.4);
-scene.add(lampLight);
+const warmFill = new THREE.PointLight(0xffb877, 9, 14, 2);
+warmFill.position.set(2.3, 2.15, -0.3);
+scene.add(warmFill);
 
-/* ================= 贴图 ================= */
-function tex(w, h, draw, repeat){
-  const c = document.createElement('canvas');
-  c.width = w; c.height = h;
-  draw(c.getContext('2d'), w, h);
-  const t = new THREE.CanvasTexture(c);
-  t.magFilter = THREE.NearestFilter; t.minFilter = THREE.NearestFilter;
-  t.colorSpace = THREE.SRGBColorSpace;
-  if (repeat){ t.wrapS = t.wrapT = THREE.RepeatWrapping; t.repeat.set(repeat[0], repeat[1]); }
-  return t;
-}
-const floorTex = tex(16,16,(x)=>{
-  x.fillStyle='#dcac78'; x.fillRect(0,0,16,16);
-  x.fillStyle='#c9905c';
-  for(let i=0;i<16;i+=8) x.fillRect(0,i,16,1);
-  x.fillRect(7,0,1,8); x.fillRect(3,8,1,8);
-  x.fillStyle='#eec28f'; x.fillRect(0,3,16,1); x.fillRect(0,11,16,1);
-},[8,8]);
-const wallTex = tex(16,32,(x)=>{
-  const g = x.createLinearGradient(0,0,0,32);
-  g.addColorStop(0,'#8e6347'); g.addColorStop(.55,'#a67954'); g.addColorStop(1,'#be9069');
-  x.fillStyle=g; x.fillRect(0,0,16,32);
-  x.fillStyle='rgba(255,238,214,.085)';
-  for(let i=0;i<13;i++) x.fillRect((i*7)%16,(i*11)%32,1,1);
-},[7,1]);
-const rugTex = tex(24,24,(x)=>{
-  x.fillStyle='#ffe9d6'; x.fillRect(0,0,24,24);
-  x.fillStyle='#ffd8c2';
-  for(let i=0;i<24;i+=4){ x.fillRect(i,0,2,1); x.fillRect(i,23,2,1); }
-  for(let i=0;i<24;i+=4){ x.fillRect(0,i,1,2); x.fillRect(23,i,1,2); }
-  x.fillStyle='#ffccb3';
-  for(let i=6;i<18;i+=6) for(let j=6;j<18;j+=6) x.fillRect(i,j,2,2);
-});
-const skyTex = tex(20,20,(x)=>{
-  const g = x.createLinearGradient(0,0,0,20);
-  g.addColorStop(0,'#3d5b93'); g.addColorStop(.7,'#8aabd8'); g.addColorStop(1,'#ffcda6');
-  x.fillStyle=g; x.fillRect(0,0,20,20);
-  x.fillStyle='#fff8dc';
-  [[4,3],[13,2],[8,6],[16,7],[6,8],[11,9],[17,4]].forEach(([a,b])=>x.fillRect(a,b,1,1));
-  x.fillStyle='#fff3c4'; x.fillRect(11,3,2,2);
-  x.fillStyle='#fffdf0'; x.fillRect(11,3,1,1);
-});
-const picTex = tex(20,20,(x)=>{
-  x.fillStyle='#fff3dd'; x.fillRect(0,0,20,20);
-  x.fillStyle='#a8c6e8'; x.fillRect(2,2,16,10);
-  x.fillStyle='#8cb784'; x.fillRect(2,12,16,6);
-  x.fillStyle='#f9bd82'; x.fillRect(8,9,5,4);
-  x.fillStyle='#4a3226'; x.fillRect(9,10,1,1); x.fillRect(11,10,1,1);
-  x.fillStyle='#fffbf2'; x.fillRect(9,12,3,2);
-});
-const picTex2 = tex(20,20,(x)=>{
-  x.fillStyle='#ffe4ec'; x.fillRect(0,0,20,20);
-  x.fillStyle='#ff7f9e';
-  x.fillRect(7,5,5,4); x.fillRect(6,6,7,4); x.fillRect(7,9,5,3); x.fillRect(8,11,3,2);
-  x.fillStyle='#fff'; x.fillRect(7,6,1,1);
-});
+const faceFill = new THREE.PointLight(0xfff2e0, 4.5, 9, 2);
+faceFill.position.set(0.6, 1.6, 3.2);
+scene.add(faceFill);
 
 /* ================= 房间 ================= */
-const floor = new THREE.Mesh(new THREE.CircleGeometry(19,40), new THREE.MeshToonMaterial({map:floorTex, gradientMap:GRAD}));
-floor.rotation.x = -Math.PI/2; floor.receiveShadow = true;
+const floor = new THREE.Mesh(new THREE.CircleGeometry(20, 64), mat(C.floor, {roughness:.95}));
+floor.rotation.x = -Math.PI/2;
+floor.receiveShadow = true;
 scene.add(floor);
 
-const rug = new THREE.Mesh(new THREE.CircleGeometry(2.85,40), new THREE.MeshToonMaterial({map:rugTex, gradientMap:GRAD}));
-rug.rotation.x = -Math.PI/2; rug.position.y = .012; rug.receiveShadow = true;
+const rug = new THREE.Mesh(new THREE.CircleGeometry(2.9, 64), mat(C.rug, {roughness:1}));
+rug.rotation.x = -Math.PI/2; rug.position.y = .01; rug.receiveShadow = true;
 scene.add(rug);
-const rugRing = new THREE.Mesh(new THREE.RingGeometry(2.05,2.22,40), toon(C.rug2));
-rugRing.rotation.x = -Math.PI/2; rugRing.position.y = .018;
-scene.add(rugRing);
-for (let i=0;i<32;i++){
-  const a = i/32*Math.PI*2;
-  const fg = cube(.05,.03,.16,C.rug2);
-  fg.position.set(Math.cos(a)*2.88, .03, Math.sin(a)*2.88);
-  fg.rotation.y = -a;
-  scene.add(fg);
-}
+const rug2 = new THREE.Mesh(new THREE.RingGeometry(2.06, 2.24, 64), mat(C.rug2, {roughness:1}));
+rug2.rotation.x = -Math.PI/2; rug2.position.y = .014;
+scene.add(rug2);
 
-const wall = new THREE.Mesh(new THREE.PlaneGeometry(30,13), new THREE.MeshToonMaterial({map:wallTex, gradientMap:GRAD}));
-wall.position.set(0,6.5,-5.1); wall.receiveShadow = true;
+/* 墙：柔和渐变 */
+const wallTex = (()=>{
+  const c = document.createElement('canvas'); c.width = 4; c.height = 256;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0,0,0,256);
+  g.addColorStop(0,'#ffe9d5'); g.addColorStop(.5,'#ffdfc4'); g.addColorStop(1,'#f6cba8');
+  x.fillStyle = g; x.fillRect(0,0,4,256);
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+})();
+const wall = new THREE.Mesh(new THREE.PlaneGeometry(30, 13), new THREE.MeshStandardMaterial({map:wallTex, roughness:1}));
+wall.position.set(0, 6.5, -5.2);
+wall.receiveShadow = true;
 scene.add(wall);
-scene.add(put(cube(30,.3,.16,C.woodD), 0, .15, -5.02));
-scene.add(put(cube(30,.06,.2,C.wood), 0, .32, -5.0));
+
+const skirt = box(30,.3,.18,C.woodD);
+skirt.position.set(0,.15,-5.06); scene.add(skirt);
 
 /* 窗 */
-const winW = 2.9, winH = 2.4;
-const wglass = new THREE.Mesh(new THREE.PlaneGeometry(winW,winH), new THREE.MeshBasicMaterial({map:skyTex}));
-wglass.position.set(-2.75,3.4,-5.03); scene.add(wglass);
-const wframe = new THREE.Mesh(new THREE.TorusGeometry(1.56,.1,4,4), toon(C.wood));
-wframe.position.set(-2.75,3.4,-5.0); wframe.rotation.z = Math.PI/4; wframe.scale.set(1,.835,1);
-scene.add(wframe);
-scene.add(put(cube(.07,winH-.08,.07,C.wood), -2.75, 3.4, -4.99));
-scene.add(put(cube(winW-.08,.07,.07,C.wood), -2.75, 3.4, -4.99));
-scene.add(put(cube(winW+.5,.16,.36,C.wood), -2.75, 2.14, -4.9));
-for (const s of [-1,1]){
-  const cur = cube(.44,2.95,.12,0xffd1b0); put(cur, -2.75+s*1.84, 3.22, -4.88); cur.rotation.z = s*.03; scene.add(cur);
-  scene.add(put(cube(.2,2.95,.14,0xffba96), -2.75+s*1.63, 3.22, -4.86));
+const skyTex = (()=>{
+  const c = document.createElement('canvas'); c.width = 128; c.height = 128;
+  const x = c.getContext('2d');
+  const g = x.createLinearGradient(0,0,0,128);
+  g.addColorStop(0,'#8fc4ef'); g.addColorStop(.62,'#cfe4f6'); g.addColorStop(1,'#ffd6c0');
+  x.fillStyle = g; x.fillRect(0,0,128,128);
+  x.fillStyle = 'rgba(255,255,255,.9)';
+  [[30,34,26],[52,30,18],[84,42,22],[100,38,14]].forEach(([a,b,r])=>{
+    x.beginPath(); x.arc(a,b,r,0,7); x.fill();
+  });
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+})();
+const winW = 2.9, winH = 2.5;
+const glass = new THREE.Mesh(new THREE.PlaneGeometry(winW, winH), new THREE.MeshBasicMaterial({map:skyTex}));
+glass.position.set(-2.8, 3.5, -5.14);
+scene.add(glass);
+/* 窗框 */
+const frameMat = mat(0xfaf0e2, {roughness:.7});
+for (const [w,h,x,y] of [[winW+.34,.18,0,winH/2+.08],[winW+.34,.18,0,-winH/2-.08]]){
+  const b = box(w,h,.14,0xfaf0e2); b.position.set(-2.8+x, 3.5+y, -5.06); scene.add(b);
 }
-scene.add(put(cube(winW+3.6,.09,.09,C.woodD), -2.75, 4.72, -4.86));
-for (const s of [-1,1]) scene.add(put(ball(.1,C.wood,1,1,1,14), -2.75+s*(winW/2+1.8), 4.72, -4.86));
+for (const s of [-1,1]){
+  const b = box(.18,winH+.34,.14,0xfaf0e2); b.position.set(-2.8+s*(winW/2+.08), 3.5, -5.06); scene.add(b);
+}
+const crossV = box(.09,winH,.1,0xfaf0e2); crossV.position.set(-2.8,3.5,-5.07); scene.add(crossV);
+const crossH = box(winW,.09,.1,0xfaf0e2); crossH.position.set(-2.8,3.5,-5.07); scene.add(crossH);
+
+const sill = box(winW+.6,.16,.4,0xf3e4d0); sill.position.set(-2.8,2.2,-5.0); scene.add(sill);
+/* 窗台小植物 */
 for (let i=0;i<3;i++){
-  scene.add(put(cyl(.09,.07,.18,C.pot,12), -3.55+i*.3, 2.31, -4.84));
-  scene.add(put(ball(.11, i%2?C.leafA:C.leafB, 1,1.25,.9,12), -3.55+i*.3, 2.48, -4.84));
+  const p = cyl(.1,.075,.2,C.pot,16); p.position.set(-3.62+i*.34,2.38,-4.94); scene.add(p);
+  const l = sph(.12, i%2?C.leaf:C.leafD, 1,1.3,.9, 16);
+  l.position.set(-3.62+i*.34,2.56,-4.94); scene.add(l);
+}
+/* 窗帘 */
+for (const s of [-1,1]){
+  const cur = box(.5,3.0,.16,0xffd9bd); cur.position.set(-2.8+s*1.86,3.3,-4.98);
+  cur.rotation.z = s*.025; scene.add(cur);
+  const cur2 = box(.24,3.0,.2,0xffc6a4); cur2.position.set(-2.8+s*1.62,3.3,-4.96);
+  scene.add(cur2);
+}
+const rod = box(winW+3.9,.1,.1,C.woodD); rod.position.set(-2.8,4.86,-4.96); scene.add(rod);
+for (const s of [-1,1]){
+  const kn = sph(.11,C.wood,1,1,1,16); kn.position.set(-2.8+s*(winW/2+1.9),4.86,-4.96); scene.add(kn);
 }
 
-/* 相框 */
-function wallFrame(x,y,w,h,t){
-  scene.add(put(cube(w+.16,h+.16,.07,C.wood), x, y, -5.0));
-  const p = new THREE.Mesh(new THREE.PlaneGeometry(w,h), new THREE.MeshBasicMaterial({map:t}));
-  p.position.set(x,y,-4.95); scene.add(p);
+/* 墙面装饰：相框 */
+function picFrame(x,y,size,color,inner){
+  const f = box(size+.16,size+.16,.08,0xfaf0e2); f.position.set(x,y,-5.1); scene.add(f);
+  const p = box(size,size,.05,color); p.position.set(x,y,-5.04); scene.add(p);
+  if (inner){
+    const l = sph(.05,inner,1,1,.5,12); l.position.set(x,y+.02,-5.0); scene.add(l);
+  }
 }
-wallFrame(-.9,3.2,.85,.85,picTex);
-wallFrame(.46,3.4,.62,.62,picTex2);
-wallFrame(-.26,2.4,.55,.55,picTex2);
+picFrame(-.9,3.3,.8,0xf7c9a8,0xff8f7a);
+picFrame(.42,3.55,.58,0xcfe4f6,0xf7ab63);
+picFrame(-.16,2.42,.52,0xffd9e2,0xff8fa3);
 
 /* 串灯 */
 const wirePts = [];
-for (let i=0;i<=48;i++){
-  const t = i/48;
-  wirePts.push(-3.7+t*7.4, 2.9-Math.sin(t*Math.PI)*.62+.1, -4.82);
+for (let i=0;i<=40;i++){
+  const t = i/40;
+  wirePts.push(-3.9 + t*7.8, 3.0 - Math.sin(t*Math.PI)*.66, -5.02);
 }
-const wireGeo = new THREE.BufferGeometry();
-wireGeo.setAttribute('position', new THREE.Float32BufferAttribute(wirePts,3));
-scene.add(new THREE.Line(wireGeo, new THREE.LineBasicMaterial({color:0x5c4030})));
+const wg = new THREE.BufferGeometry();
+wg.setAttribute('position', new THREE.Float32BufferAttribute(wirePts,3));
+scene.add(new THREE.Line(wg, new THREE.LineBasicMaterial({color:0xd0aa86})));
 const bulbs = [];
-for (let i=0;i<=13;i++){
-  const t = i/13;
-  const b = ball(.055,0xffffff,1,1.15,1,10);
-  b.material = new THREE.MeshBasicMaterial({color:0xffcf92});
+for (let i=0;i<=12;i++){
+  const t = i/12;
+  const b = sph(.062, 0xffd9a0, 1,1,1, 14, {emissive:0xffb766, emissiveIntensity:1.4});
+  b.castShadow = false;
   b.userData = {warm: i%3 !== 0};
-  b.position.set(-3.7+t*7.4, 2.9-Math.sin(t*Math.PI)*.62-.04, -4.82);
+  b.position.set(-3.9+t*7.8, 3.0 - Math.sin(t*Math.PI)*.66 - .06, -5.02);
   scene.add(b); bulbs.push(b);
 }
 
-/* 挂钟 */
-const clockG = new THREE.Group();
-clockG.position.set(2.62,3.5,-4.95);
-const cbody = cyl(.46,.46,.1,C.woodD,24); cbody.rotation.x = Math.PI/2; clockG.add(cbody);
-const cface = cyl(.38,.38,.06,0xfff8ec,24); cface.rotation.x = Math.PI/2; cface.position.z = .07; clockG.add(cface);
-const handH = cube(.045,.22,.03,C.ink); handH.position.set(0,.05,.11); clockG.add(handH);
-const handM = cube(.035,.31,.03,C.ink); handM.position.set(0,.08,.13); clockG.add(handM);
-clockG.add(put(ball(.05,C.pinkD,1,1,.5,10), 0, 0, .14));
-scene.add(clockG);
-
 /* 落地灯 */
 const lampG = new THREE.Group();
-lampG.position.set(2.55,0,-.4);
-lampG.add(put(cyl(.055,.065,2.0,C.metal,12), 0, 1.0, 0));
-lampG.add(put(cyl(.44,.5,.12,C.metal,20), 0, .06, 0));
-const lshade = new THREE.Mesh(new THREE.ConeGeometry(.56,.66,20,1,true), toon(0xffe4b8,{side:THREE.DoubleSide, emissive:0x6b3d12}));
-lshade.position.y = 2.12; lampG.add(lshade);
-const lbulb = ball(.1,0xffffff,1,1,1,12); lbulb.material = new THREE.MeshBasicMaterial({color:0xfff2d4});
-lbulb.position.y = 1.94; lampG.add(lbulb);
+lampG.position.set(2.62,0,-.42);
+lampG.add(cyl(.055,.075,2.0,C.metal,20));
+lampG.children[0].position.y = 1.0;
+const lbase = cyl(.42,.5,.12,C.metal,24); lbase.position.y = .06; lampG.add(lbase);
+const lshade = new THREE.Mesh(new THREE.CylinderGeometry(.38,.56,.5,28,1,true), mat(0xffe3bd,{roughness:.9, side:THREE.DoubleSide}));
+lshade.position.y = 2.14; lampG.add(lshade);
+const lbulb = sph(.15,0xfff3d8,1,1,1,16,{emissive:0xffcf94, emissiveIntensity:2.2});
+lbulb.position.y = 1.96; lbulb.castShadow = false; lampG.add(lbulb);
 scene.add(lampG);
-
-/* 大盆栽 */
-const plantG = new THREE.Group();
-plantG.position.set(-2.35,0,-1.55);
-plantG.add(put(cyl(.34,.24,.46,C.pot,16), 0, .23, 0));
-const potRim = new THREE.Mesh(new THREE.TorusGeometry(.33,.045,6,20), toon(0xc06b52));
-potRim.position.y = .46; potRim.rotation.x = Math.PI/2; plantG.add(potRim);
-for (let i=0;i<9;i++){
-  const a = i/9*Math.PI*2;
-  const lf = ball(.2, i%2?C.leafA:C.leafB, .55,1,.9,12);
-  lf.position.set(Math.cos(a)*.22, .62+(i%3)*.13, Math.sin(a)*.22);
-  lf.rotation.z = Math.cos(a)*.8; lf.rotation.x = Math.sin(a)*.8;
-  plantG.add(lf);
-}
-scene.add(plantG);
 
 /* 书架 */
 const shelfG = new THREE.Group();
-shelfG.position.set(1.95,0,-3.1);
-for (const y of [.06,.82,1.58]) shelfG.add(put(cube(1.5,.1,.46,C.wood), 0, y, 0));
-for (const x of [-.72,.72]) shelfG.add(put(cube(.1,1.72,.46,C.woodD), x, .86, 0));
-shelfG.add(put(cube(1.44,1.7,.06,C.woodD), 0, .86, -.2));
-const bookCols = [C.red,C.yellow,C.blue,C.pinkie,0x9dc5a7,0xbdafe1];
+shelfG.position.set(2.0,0,-3.2);
+const shelfBack = box(1.5,1.8,.08,C.woodD); shelfBack.position.set(0,.9,-.22); shelfG.add(shelfBack);
+for (const x of [-.73,.73]){
+  const s = box(.09,1.8,.48,C.wood); s.position.set(x,.9,0); shelfG.add(s);
+}
+for (const y of [.04,.84,1.64]){
+  const b = box(1.5,.09,.48,C.wood); b.position.set(0,y,0); shelfG.add(b);
+}
+const bookColors = [C.red,C.yellow,C.blue,C.purple,0x8fc0a0,0xe79f8f];
 let bi = 0;
 for (let row=0; row<2; row++){
   for (let i=0;i<6;i++){
-    const bh = .32+(i%3)*.07;
-    const bk = cube(.13,bh,.32, bookCols[bi++ % bookCols.length]);
-    bk.position.set(-.56+i*.19, .11+row*.76+bh/2, .1);
+    const bh = .3 + (i%3)*.06;
+    const bk = box(.12,bh,.3, bookColors[bi++%bookColors.length]);
+    bk.position.set(-.55+i*.19, .085+row*.8+bh/2, .09);
     bk.rotation.z = (i%2?1:-1)*.02;
     shelfG.add(bk);
   }
 }
-shelfG.add(put(ball(.15,0xd3aa83,1,1.1,1,16), -.4, 1.78, .08));
-[[-.45,1.82],[-.35,1.82]].forEach(([x,y])=>shelfG.add(put(cube(.035,.035,.02,C.ink), x, y, .2)));
-[[-.53,1.9],[-.27,1.9]].forEach(([x,y])=>shelfG.add(put(ball(.05,0xd3aa83,1,1,.5,10), x, y, .08)));
-shelfG.add(put(cyl(.11,.09,.2,C.pot,12), .3, 1.72, .08));
-shelfG.add(put(ball(.1,C.leafB,1,1.6,.9,12), .3, 1.94, .08));
+const bear = sph(.16,0xd2a882,1,1.08,1,20); bear.position.set(-.42,1.76,.05); shelfG.add(bear);
+for (const s of [-1,1]){
+  const e = sph(.06,0xd2a882,1,1,.6,14); e.position.set(-.42+s*.11,1.88,.05); shelfG.add(e);
+  const ey = sph(.022,C.eye,1,1,.6,12); ey.position.set(-.42+s*.055,1.78,.2); shelfG.add(ey);
+}
+const sucP = cyl(.12,.1,.2,C.pot,16); sucP.position.set(.34,1.72,.06); shelfG.add(sucP);
+const sucL = sph(.1,C.leafD,1,1.7,.9,16); sucL.position.set(.34,1.96,.06); shelfG.add(sucL);
 scene.add(shelfG);
 
 /* 茶几 */
 const tableG = new THREE.Group();
-tableG.position.set(-1.15,0,1.15);
-tableG.add(put(cyl(.5,.5,.09,C.wood,24), 0, .46, 0));
-tableG.add(put(cyl(.08,.09,.46,C.woodD,12), 0, .23, 0));
-tableG.add(put(cyl(.1,.08,.14,0xffffff,16), -.12, .57, .02));
-tableG.add(put(cyl(.082,.082,.02,0x9a6540,16), -.12, .64, .02));
-const tHandle = new THREE.Mesh(new THREE.TorusGeometry(.055,.018,6,12), toon(0xffffff));
-tHandle.position.set(-.02,.57,.02); tHandle.rotation.y = Math.PI/2; tableG.add(tHandle);
-tableG.add(put(cyl(.14,.14,.02,0xffffff,16), -.12, .51, .02));
-tableG.add(put(cyl(.16,.16,.025,0xfff4e4,16), .16, .5, -.12));
-for (let i=0;i<3;i++) tableG.add(put(cyl(.06,.06,.03,0xd39960,10), .16+(i-1)*.06, .53, -.12+(i%2)*.05));
+tableG.position.set(-1.25,0,1.15);
+const ttop = cyl(.52,.52,.09,C.wood,32); ttop.position.y = .47; tableG.add(ttop);
+const tleg = cyl(.085,.1,.47,C.woodD,20); tleg.position.y = .235; tableG.add(tleg);
+const cup = cyl(.1,.085,.15,0xfffdf8,24); cup.position.set(-.14,.58,.05); tableG.add(cup);
+const cupIn = cyl(.084,.084,.02,0xa9764e,20); cupIn.position.set(-.14,.655,.05); tableG.add(cupIn);
+const handle = new THREE.Mesh(new THREE.TorusGeometry(.055,.02,10,24), mat(0xfffdf8,{roughness:.7}));
+handle.position.set(-.03,.58,.05); handle.rotation.y = Math.PI/2; handle.castShadow = true; tableG.add(handle);
+const saucer = cyl(.15,.15,.022,0xfffdf8,24); saucer.position.set(-.14,.515,.05); tableG.add(saucer);
+const plate = cyl(.17,.17,.028,0xfff6ec,24); plate.position.set(.18,.51,-.13); tableG.add(plate);
+for (let i=0;i<3;i++){
+  const coo = cyl(.062,.062,.032,0xd9a06a,18);
+  coo.position.set(.18+(i-1)*.065,.535,-.13+(i%2)*.055); tableG.add(coo);
+}
 scene.add(tableG);
 
-/* 狗碗 */
+/* 大盆栽 */
+const plantG = new THREE.Group();
+plantG.position.set(-2.5,0,-1.7);
+const pot = cyl(.36,.26,.5,C.pot,28); pot.position.y = .25; plantG.add(pot);
+const potRim = new THREE.Mesh(new THREE.TorusGeometry(.35,.05,12,32), mat(0xc0755a,{roughness:.85}));
+potRim.position.y = .5; potRim.rotation.x = Math.PI/2; potRim.castShadow = true; plantG.add(potRim);
+for (let i=0;i<10;i++){
+  const a = i/10*Math.PI*2;
+  const lf = sph(.21, i%2?C.leaf:C.leafD, .55, 1.1, .9, 18);
+  lf.position.set(Math.cos(a)*.24, .66+(i%3)*.14, Math.sin(a)*.24);
+  lf.rotation.z = Math.cos(a)*.85; lf.rotation.x = Math.sin(a)*.85;
+  plantG.add(lf);
+}
+scene.add(plantG);
+
+/* 小零食桶 & 碗 & 玩具 */
+const bucketG = new THREE.Group();
+bucketG.position.set(1.9,0,1.0);
+const bk = cyl(.25,.2,.34,0xfdfbf4,28); bk.position.y = .17; bucketG.add(bk);
+const bkS = cyl(.255,.255,.1,C.red,28); bkS.position.y = .21; bucketG.add(bkS);
+for (let i=0;i<3;i++){
+  const dr = sph(.105,0xd08a45,1,1.5,1,18);
+  dr.position.set((i-1)*.115,.38,i%2?.02:-.03); dr.rotation.z = (i-1)*.3; bucketG.add(dr);
+  const bn = cyl(.022,.022,.14,0xfffaf0,12);
+  bn.position.set((i-1)*.115+(i-1)*.045,.49,i%2?.02:-.03); bn.rotation.z = (i-1)*.42; bucketG.add(bn);
+}
+scene.add(bucketG);
+
 const bowlG = new THREE.Group();
-bowlG.position.set(1.35,0,1.5);
-bowlG.add(put(cyl(.26,.2,.15,C.red,18), 0, .08, 0));
-bowlG.add(put(cyl(.22,.22,.02,0x7a4a2a,18), 0, .14, 0));
-for (let i=0;i<7;i++) bowlG.add(put(ball(.035,0x8a5a30,1,.8,1,8), (Math.random()-.5)*.2, .155, (Math.random()-.5)*.2));
-bowlG.add(put(cyl(.24,.18,.13,C.blue,18), -.62, .07, 0));
-bowlG.add(put(cyl(.2,.2,.02,0xa8d8f0,18), -.62, .13, 0));
+bowlG.position.set(1.3,0,1.6);
+const bowl = cyl(.27,.21,.16,C.red,28); bowl.position.y = .085; bowlG.add(bowl);
+const bowlIn = cyl(.235,.235,.02,0x8a5a34,24); bowlIn.position.y = .15; bowlG.add(bowlIn);
+for (let i=0;i<8;i++){
+  const k = sph(.038,0x9a6838,1,.8,1,12);
+  k.position.set((Math.random()-.5)*.22,.16,(Math.random()-.5)*.22); bowlG.add(k);
+}
+const wbowl = cyl(.25,.19,.14,0x9dc0dd,28); wbowl.position.set(-.64,.075,0); bowlG.add(wbowl);
+const water = cyl(.21,.21,.02,0xbfe0f2,24); water.position.set(-.64,.145,0); bowlG.add(water);
 scene.add(bowlG);
 
-/* 玩具 */
-const tennis = ball(.16,0xd9e85a,1,1,1,16); tennis.position.set(.55,.16,.95); scene.add(tennis);
-const tline = new THREE.Mesh(new THREE.TorusGeometry(.152,.018,6,16), toon(0xffffff));
-tline.position.copy(tennis.position); tline.rotation.x = Math.PI/2.4; scene.add(tline);
+const tennis = sph(.17,0xd8e86a,1,1,1,24);
+tennis.position.set(.5,.17,1.0); scene.add(tennis);
+const tline = new THREE.Mesh(new THREE.TorusGeometry(.162,.018,10,32), mat(0xffffff,{roughness:.8}));
+tline.position.copy(tennis.position); tline.rotation.set(Math.PI/2.6,.4,0); tline.castShadow = true; scene.add(tline);
 
 for (const s of [-1,1]){
-  const sl = cube(.2,.07,.36,C.pinkie); sl.position.set(2.0+s*.27,.05,1.85-s*.12); sl.rotation.y = s*.22; scene.add(sl);
-  const slT = cube(.16,.06,.1,0xffe1eb); slT.position.set(2.0+s*.27,.09,1.72-s*.12); slT.rotation.y = s*.22; scene.add(slT);
+  const sl = box(.22,.08,.38,0xf0a8b4);
+  sl.position.set(2.05+s*.3,.05,1.9-s*.14); sl.rotation.y = s*.24; scene.add(sl);
+  const slT = box(.17,.07,.11,0xffdade);
+  slT.position.set(2.05+s*.3,.1,1.76-s*.14); slT.rotation.y = s*.24; scene.add(slT);
 }
-const cbox = cube(.62,.5,.5,0xc89c6c); cbox.position.set(2.75,.25,-2.1); cbox.rotation.y = .4; scene.add(cbox);
-const cboxT = cube(.64,.06,.52,0xa97e53); cboxT.position.set(2.75,.5,-2.1); cboxT.rotation.y = .4; scene.add(cboxT);
-const blanket = cube(.5,.16,.4,0xf6c5ae); blanket.position.set(2.3,.09,1.0); blanket.rotation.y = -.3; scene.add(blanket);
-const blanket2 = cube(.46,.1,.36,0xffd8c1); blanket2.position.set(2.3,.2,1.0); blanket2.rotation.y = -.22; scene.add(blanket2);
 
-/* 炸鸡桶 */
-const bucket = new THREE.Group();
-bucket.position.set(1.85,0,1.02);
-bucket.add(put(cyl(.24,.19,.32,0xf7f4eb,16), 0, .16, 0));
-bucket.add(put(cyl(.245,.245,.09,C.red,16), 0, .2, 0));
-for (let i=0;i<3;i++){
-  const dr = ball(.1,0xd07d35,1,1.5,1,12);
-  dr.position.set((i-1)*.11,.36,i%2?.02:-.03); dr.rotation.z = (i-1)*.3; bucket.add(dr);
-  const bn = cube(.04,.13,.04,0xfff9ee);
-  bn.position.set((i-1)*.11+(i-1)*.04,.46,i%2?.02:-.03); bn.rotation.z = (i-1)*.4; bucket.add(bn);
-}
-scene.add(bucket);
+const blanket = box(.52,.14,.42,0xf5c3ab); blanket.position.set(2.35,.08,.95); blanket.rotation.y = -.3; scene.add(blanket);
+const blanket2 = box(.46,.1,.36,0xffdcca); blanket2.position.set(2.35,.19,.95); blanket2.rotation.y = -.22; scene.add(blanket2);
 
-/* 项圈挂钩 */
-const hookG = new THREE.Group();
-hookG.position.set(3.35,2.9,-4.9);
-hookG.add(cube(.06,.2,.06,0xa99271));
-const collar = new THREE.Mesh(new THREE.TorusGeometry(.17,.045,8,20), toon(C.scarf));
-collar.position.set(0,-.42,0); collar.rotation.x = Math.PI/2; hookG.add(collar);
-hookG.add(put(cube(.08,.08,.03,0xffda6e), 0, -.6, .05));
-scene.add(hookG);
-
-/* ================= 铲屎官 hhz ================= */
+/* ================= hhz（Q 版） ================= */
 function buildHuman(){
   const g = new THREE.Group();
   const S = new THREE.Group();
   g.add(S);
 
-  S.add(put(ball(.52,C.rug2,1.1,.32,1.05,20), 0, .1, 0));
+  /* 坐垫 */
+  const cushion = sph(.54,C.rug2,1.15,.3,1.1,28);
+  cushion.position.y = .09; S.add(cushion);
+
+  /* 盘腿 */
   for (const s of [-1,1]){
-    const leg = ball(.25,C.mintD,1.45,.62,.95,16);
-    leg.position.set(s*.24,.22,.16); leg.rotation.z = -s*.28; S.add(leg);
-    S.add(put(ball(.14,C.cream,1.1,.85,1,14), s*.36, .17, .46));
+    const leg = sph(.24,C.mintD,1.5,.6,.95,24);
+    leg.position.set(s*.24,.21,.16); leg.rotation.z = -s*.26; S.add(leg);
+    const foot = sph(.14,C.cream,1.15,.85,1,20);
+    foot.position.set(s*.4,.16,.44); S.add(foot);
   }
 
-  const torso = ball(.44,C.mint,1,1.18,.86,22); torso.position.set(0,.78,.02); ink(torso,1.045); S.add(torso);
-  S.add(put(ball(.34,C.mintD,1,.65,.55,16), 0, 1.0, -.24));
+  /* 身体 */
+  const torso = sph(.44,C.mint,1,1.15,.88,32);
+  torso.position.set(0,.78,.02); S.add(torso);
+  const hood = sph(.34,C.mintD,1,.62,.58,24);
+  hood.position.set(0,1.02,-.26); S.add(hood);
   for (const x of [-.1,.1]){
-    S.add(put(cube(.03,.17,.03,C.cream), x, .98, .36));
-    S.add(put(cube(.05,.05,.05,0xffd18c), x, .88, .36));
+    const str = box(.028,.17,.028,C.cream);
+    str.position.set(x,1.0,.37); S.add(str);
+    const knob = sph(.028,0xffd0a0,1,1,1,12);
+    knob.position.set(x,.895,.37); S.add(knob);
   }
-  S.add(put(cyl(.14,.16,.14,C.skin,14), 0, 1.2, .02));
 
+  /* 脖子 */
+  const neck = cyl(.15,.17,.13,C.skin,20);
+  neck.position.set(0,1.22,.02); S.add(neck);
+
+  /* 头（Q 版大头） */
   const headG = new THREE.Group();
-  headG.position.set(0,1.22,.02);
+  headG.position.set(0,1.24,.02);
   S.add(headG);
+  const head = sph(.33,C.skin,1,1.02,1,32);
+  head.position.set(0,.26,0); headG.add(head);
 
-  const HR = {cx:0, cy:.24, cz:0, rx:.30, ry:.31, rz:.288};
-  const head = ball(.30,C.skin,1,1.033,.96,26); head.position.set(0,.24,0); ink(head,1.035); headG.add(head);
-  const hair = new THREE.Mesh(new THREE.SphereGeometry(.315,26,16,0,Math.PI*2,0,Math.PI*.55), toon(C.hair));
-  hair.position.set(0,.275,-.01); hair.scale.y = .96; ink(hair,1.03); headG.add(hair);
-  headG.add(put(ball(.155,C.hair,1.5,.62,.85,18), -.05, .315, .195));
-  headG.add(put(ball(.105,C.hair,.7,.95,.95,14), .272, .17, .015));
-  headG.add(put(ball(.095,C.hair,.7,.95,.95,14), -.282, .17, .015));
-
-  for (const x of [-.112,.112]){
-    const ez = surfZ(HR.cx,HR.cy,HR.cz,HR.rx,HR.ry,HR.rz, x, .245) + .004;
-    headG.add(put(cube(.048,.05,.028,C.ink), x, .245, ez));
-    headG.add(put(cube(.017,.017,.012,0xffffff), x+.011, .26, ez+.016));
-    const br = cube(.072,.015,.012,C.hair); br.position.set(x,.302,ez-.014); br.rotation.z = x>0?-.12:.12; headG.add(br);
+  /* 头发 */
+  const hair = new THREE.Mesh(new THREE.SphereGeometry(.345,32,20,0,Math.PI*2,0,Math.PI*.56), mat(C.hair,{roughness:.75}));
+  hair.position.set(0,.28,-.005); hair.scale.y = .96; hair.castShadow = true; headG.add(hair);
+  const fringe = sph(.16,C.hair,1.6,.62,.9,24);
+  fringe.position.set(-.05,.31,.2); fringe.rotation.z = .17; headG.add(fringe);
+  const fringe2 = sph(.1,C.hair,1.2,.7,.9,20);
+  fringe2.position.set(.16,.305,.17); fringe2.rotation.z = -.3; headG.add(fringe2);
+  for (const s of [-1,1]){
+    const side = sph(.105,C.hair,.72,.95,.9,18);
+    side.position.set(s*.29,.21,.02); headG.add(side);
   }
-  const mz = surfZ(HR.cx,HR.cy,HR.cz,HR.rx,HR.ry,HR.rz, 0, .155) + .003;
-  headG.add(put(cube(.068,.021,.012,C.pinkD), 0, .155, mz));
+
+  /* 眼睛（大而圆，带高光） */
+  for (const s of [-1,1]){
+    const eg = new THREE.Group();
+    eg.position.set(s*.12,.28,.28);
+    const e = sph(.048,C.eye,1,1.08,.7,20);
+    eg.add(e);
+    const h1 = sph(.019,0xffffff,1,1,1,12);
+    h1.position.set(.015,.017,.032); eg.add(h1);
+    const h2 = sph(.009,0xffffff,1,1,1,10);
+    h2.position.set(-.014,-.014,.031); eg.add(h2);
+    headG.add(eg);
+    const br = box(.072,.017,.012,C.hair);
+    br.position.set(s*.12,.345,.27); br.rotation.z = s>0?-.13:.13; headG.add(br);
+  }
+  /* 嘴 + 腮红 */
+  const mouth = new THREE.Mesh(new THREE.TorusGeometry(.038,.011,8,20,Math.PI), mat(C.pinkD,{roughness:.6}));
+  mouth.position.set(0,.185,.29); mouth.rotation.z = Math.PI; headG.add(mouth);
   const cheeks = [];
-  for (const x of [-.195,.195]){
-    const cz = surfZ(HR.cx,HR.cy,HR.cz,HR.rx,HR.ry,HR.rz, x, .18);
-    const ch = ball(.056,C.blush,1,.62,.28,14); ch.position.set(x,.18,cz-.012); headG.add(ch); cheeks.push(ch);
+  for (const s of [-1,1]){
+    const ch = sph(.058,C.pink,1,.62,.28,18,{roughness:.9});
+    ch.position.set(s*.205,.205,.245); headG.add(ch); cheeks.push(ch);
   }
+  /* 鼻子（Q 版小黑点） */
+  const hnose = sph(.022,C.pinkD,1.1,.9,.8,12);
+  hnose.position.set(0,.235,.325); headG.add(hnose);
 
-  const shL = new THREE.Vector3(-.38,1.04,.04), shR = new THREE.Vector3(.38,1.04,.04);
-  function makeArm(sh, handRest){
+  /* 手臂（可拥抱） */
+  const shL = new THREE.Vector3(-.38,1.06,.04);
+  const shR = new THREE.Vector3(.38,1.06,.04);
+  function arm(sh, handRest, color){
     const grp = new THREE.Group();
     grp.position.copy(sh);
     const dir = handRest.clone().sub(sh);
-    const seg = limb(new THREE.Vector3(0,0,0), dir.clone(), .105, C.mint); ink(seg,1.055); grp.add(seg);
-    grp.add(put(ball(.135,C.mintD,1,1,1,14), dir.x*.26, dir.y*.26, dir.z*.26));
-    const hand = ball(.12,C.skin,1,1,1,16); hand.position.copy(dir); grp.add(hand);
-    grp.userData = {dir, hand, restDir:dir.clone().normalize(), hand0:dir.clone()};
+    const len = dir.length();
+    const seg = new THREE.Mesh(new THREE.CapsuleGeometry(.105, Math.max(len-.21,.01), 8, 20), mat(color,{roughness:.9}));
+    seg.position.copy(dir).multiplyScalar(.5);
+    seg.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0), dir.clone().normalize());
+    seg.castShadow = true; grp.add(seg);
+    const cuff = sph(.115,C.mintD,1,1,1,18);
+    cuff.position.copy(dir).multiplyScalar(.3); grp.add(cuff);
+    const hand = sph(.118,C.skin,1,1,1,20);
+    hand.position.copy(dir); grp.add(hand);
+    grp.userData = {dir: dir.clone(), hand, hand0: dir.clone(), rest: dir.clone().normalize()};
     return grp;
   }
-  const armL = makeArm(shL, new THREE.Vector3(-.66,.3,.34));
-  const armR = makeArm(shR, new THREE.Vector3(.84,.95,.66));
+  const armL = arm(shL, new THREE.Vector3(-.68,.32,.36), C.mint);
+  const armR = arm(shR, new THREE.Vector3(.86,.98,.68), C.mint);
   S.add(armL); S.add(armR);
 
-  g.position.set(-.72,0,-.2);
-  g.rotation.y = .24;
+  g.position.set(-.72,0,-.24);
+  g.rotation.y = .26;
 
-  const hugL = new THREE.Vector3(-.16,.76,.60).sub(shL).normalize();
-  const hugR = new THREE.Vector3(.2,.88,.64).sub(shR).normalize();
+  const hugL = new THREE.Vector3(-.18,.72,.66).sub(shL).normalize();
+  const hugR = new THREE.Vector3(.22,.84,.7).sub(shR).normalize();
   g.userData = {
     S, headG, cheeks, armL, armR,
-    qL: new THREE.Quaternion().setFromUnitVectors(armL.userData.restDir, hugL),
-    qR: new THREE.Quaternion().setFromUnitVectors(armR.userData.restDir, hugR)
+    qL: new THREE.Quaternion().setFromUnitVectors(armL.userData.rest, hugL),
+    qR: new THREE.Quaternion().setFromUnitVectors(armR.userData.rest, hugR)
   };
   return g;
 }
 const human = buildHuman();
 scene.add(human);
 
-/* 简易环境贴图（让 PBR 有东西可反射） */
-(function(){
-  const c = document.createElement('canvas');
-  c.width = 64; c.height = 32;
-  const x = c.getContext('2d');
-  const g = x.createLinearGradient(0,0,0,32);
-  g.addColorStop(0,'#fff4e0'); g.addColorStop(.5,'#ffd9b0'); g.addColorStop(1,'#6a4a34');
-  x.fillStyle = g; x.fillRect(0,0,64,32);
-  const t = new THREE.CanvasTexture(c);
-  t.mapping = THREE.EquirectangularReflectionMapping;
-  t.colorSpace = THREE.SRGBColorSpace;
-  scene.environment = t;
-})();
-
-/* 花纹贴图：1024x512 PNG，超采样抗锯齿，边缘平滑 */
-const HEAD_TEX_URL = 'data:image/png;base64,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';
-const BODY_TEX_URL = 'data:image/png;base64,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';
-function loadTex(url){
-  const t = new THREE.TextureLoader().load(url);
-  t.colorSpace = THREE.SRGBColorSpace;
-  t.anisotropy = 8;
-  t.wrapS = THREE.RepeatWrapping;
-  t.minFilter = THREE.LinearMipmapLinearFilter;
-  t.magFilter = THREE.LinearFilter;
-  return t;
-}
-const headTex = loadTex(HEAD_TEX_URL);
-const bodyTex = loadTex(BODY_TEX_URL);
-
-/* ================= 迪士尼风材质 ================= */
-/* 关键：高光柔、粗糙度中等、去掉卡通阶调，让形体靠光照自然塑形 */
-const furMat = new THREE.MeshStandardMaterial({
-  color:0xf7b878, roughness:.60, metalness:.0,
-  envMapIntensity:1.0
-});
-const creamMat = new THREE.MeshStandardMaterial({
-  color:0xfff8ec, roughness:.66, metalness:.0
-});
-const bodyMat = new THREE.MeshStandardMaterial({
-  color:0xffffff, roughness:.62, metalness:.0, map:bodyTex
-});
-const headMat = new THREE.MeshStandardMaterial({
-  color:0xffffff, roughness:.62, metalness:.0, map:headTex
-});
-const noseMat = new THREE.MeshStandardMaterial({
-  color:0x2e211d, roughness:.18, metalness:.05
-});
-const inkMat = new THREE.MeshStandardMaterial({color:0x3a2a22, roughness:.5});
-const tongueMat = new THREE.MeshStandardMaterial({color:0xff7f96, roughness:.42});
-const whiteMat = new THREE.MeshStandardMaterial({color:0xfffdf8, roughness:.30});
-const irisMat = new THREE.MeshStandardMaterial({color:0x53321f, roughness:.28});
-const pupilMat = new THREE.MeshStandardMaterial({color:0x1a1210, roughness:.22});
-const browMat = new THREE.MeshStandardMaterial({color:0xd98a44, roughness:.6});
-const blushMat = new THREE.MeshStandardMaterial({color:0xff9db0, roughness:.75, transparent:true, opacity:.55});
-const earMat = new THREE.MeshStandardMaterial({color:0xffb9c4, roughness:.7});
-const pinkMat = new THREE.MeshStandardMaterial({color:0xff8fa4, roughness:.55});
-const scarfMat = new THREE.MeshStandardMaterial({color:0xff8fa8, roughness:.78});
-const scarfDMat = new THREE.MeshStandardMaterial({color:0xe8708c, roughness:.78});
-const cheekMat = new THREE.MeshStandardMaterial({color:0xf9c48c, roughness:.68});
-/* 胸口白毛：用 alphaMap 裁剪，只保留正面中央一块 */
-const chestAlpha = (()=>{
-  const c = document.createElement('canvas');
-  c.width = 256; c.height = 128;
-  const x = c.getContext('2d');
-  x.fillStyle = '#000'; x.fillRect(0,0,256,128);
-  const g = x.createRadialGradient(64, 78, 4, 64, 78, 52);
-  g.addColorStop(0,'#ffffff'); g.addColorStop(.72,'#ffffff'); g.addColorStop(1,'#000000');
-  x.fillStyle = g;
-  x.beginPath(); x.ellipse(64, 78, 46, 44, 0, 0, Math.PI*2); x.fill();
-  const t = new THREE.CanvasTexture(c);
-  t.colorSpace = THREE.NoColorSpace;
-  return t;
-})();
-const creamPatchMat = new THREE.MeshStandardMaterial({
-  color:0xfff8ec, roughness:.66, transparent:true,
-  alphaMap:chestAlpha, depthWrite:false
-});
-const lashMat = new THREE.MeshStandardMaterial({color:0x4a362c, roughness:.55});
-
-/* ================= 柯基 炸炸炸鸡 ================= */
+/* ================= 柯基 炸炸炸鸡（Q 版大头） ================= */
 function buildCorgi(){
   const g = new THREE.Group();
   const body = new THREE.Group();
   g.add(body);
 
-  /* ============ 身体：一个圆润的梨形 ============ */
-  const torso = new THREE.Mesh(new THREE.SphereGeometry(.44, 96, 72), bodyMat);
-  torso.scale.set(1.02, .95, 1.08);
-  torso.position.set(0, .56, -.02);
-  torso.castShadow = true; torso.receiveShadow = true;
+  /* —— 身子：小梨形 —— */
+  const torso = sph(.38,C.fur,1.04,1.0,.96,32);
+  torso.position.set(0,.54,-.02);
+  torso.rotation.x = -.1;
   body.add(torso);
 
-  /* 胸口白毛已画在躯干贴图里，无需额外几何体 */
+  /* 白胸 */
+  const chest = sph(.28,C.cream,.9,1.0,.72,28);
+  chest.position.set(0,.5,.2); body.add(chest);
 
-  /* 后腿 */
+  /* —— 后腿（圆鼓鼓） —— */
+  const backLegs = [];
   for (const s of [-1,1]){
-    const hip = new THREE.Mesh(new THREE.SphereGeometry(.225, 56, 44), furMat);
-    hip.scale.set(1, .96, 1.0);
-    hip.position.set(s*.265, .27, -.09);
-    hip.castShadow = true; body.add(hip);
-    const hf = new THREE.Mesh(new THREE.SphereGeometry(.135, 48, 36), creamMat);
-    hf.scale.set(1.02, .68, 1.22);
-    hf.position.set(s*.265, .086, .10);
-    body.add(hf);
+    const hip = sph(.2,C.fur,1,1,1.02,24);
+    hip.position.set(s*.27,.26,-.1); body.add(hip); backLegs.push(hip);
+    const paw = sph(.14,C.cream,1,.85,1.18,20);
+    paw.position.set(s*.27,.1,.06); body.add(paw);
   }
-  /* 屁股 */
-  const butt = new THREE.Mesh(new THREE.SphereGeometry(.255, 64, 48), creamMat);
-  butt.scale.set(1.05, .94, .80);
-  butt.position.set(0, .36, -.325);
-  body.add(butt);
 
-  /* ============ 前腿：短而圆 ============ */
+  /* —— 前腿（短短的白袜子） —— */
+  const frontLegs = [];
   for (const s of [-1,1]){
-    const leg = new THREE.Mesh(new THREE.CapsuleGeometry(.062, .105, 10, 24), furMat);
-    leg.position.set(s*.148, .155, .370);
-    leg.castShadow = true; body.add(leg);
-    const paw = new THREE.Mesh(new THREE.SphereGeometry(.078, 48, 36), creamMat);
-    paw.scale.set(1.10, .74, 1.28);
-    paw.position.set(s*.148, .054, .425);
-    paw.castShadow = true; body.add(paw);
-    /* 肉垫：极小的粉点 */
+    const leg = new THREE.Mesh(new THREE.CapsuleGeometry(.072,.18,8,18), mat(C.cream,{roughness:.9}));
+    leg.position.set(s*.15,.21,.3);
+    leg.castShadow = true; body.add(leg); frontLegs.push(leg);
+    const paw = sph(.092,C.cream,1,.78,1.15,18);
+    paw.position.set(s*.15,.075,.34); body.add(paw);
+    /* 小肉垫 */
     for (let i=-1;i<=1;i++){
-      const pad = new THREE.Mesh(new THREE.SphereGeometry(.019, 20, 16), pinkMat);
-      pad.scale.set(1, .8, 1);
-      pad.position.set(s*.145 + i*.038, .050, .516);
-      body.add(pad);
+      const toe = sph(.022,C.pink,1,.85,1,10);
+      toe.position.set(s*.15 + i*.045,.055,.42); body.add(toe);
     }
   }
 
-  /* 尾巴：小小绒球 */
+  /* —— 尾巴（毛茸茸小球） —— */
   const tail = new THREE.Group();
-  tail.position.set(0, .50, -.455);
-  const tb = new THREE.Mesh(new THREE.SphereGeometry(.105, 48, 36), creamMat);
-  tb.position.set(0, .02, -.05); tb.castShadow = true; tail.add(tb);
+  tail.position.set(0,.62,-.36);
+  const t1 = sph(.145,C.cream,1,1,1.05,20); tail.add(t1);
+  const t2 = sph(.1,C.cream,1,1,1,16); t2.position.set(.02,.15,-.04); tail.add(t2);
+  const t3 = sph(.062,C.cream,1,1,1,12); t3.position.set(.03,.25,-.07); tail.add(t3);
   body.add(tail);
 
-  /* 脖子：露出一小段，形成迪士尼式的"抬头"姿势 */
-  const neck = new THREE.Mesh(new THREE.CylinderGeometry(.135, .165, .17, 48, 1), furMat);
-  neck.position.set(0, .985, .05);
-  neck.castShadow = true;
-  body.add(neck);
-
-  /* ============ 头 ============ */
+  /* —— 头：大、圆、略前倾 —— */
   const head = new THREE.Group();
-  head.position.set(0, 1.19, .06);
+  head.position.set(0,.98,.26);
+  head.rotation.x = .04;
   body.add(head);
-  const HR = .425;
 
-  /* 头骨：略扁的卵形 */
-  const skull = new THREE.Mesh(new THREE.SphereGeometry(HR, 128, 96), headMat);
-  skull.scale.set(1.06, .955, .95);
-  skull.castShadow = true; skull.receiveShadow = true;
+  const skull = sph(.4,C.fur,1.06,1.0,1.0,36);
   head.add(skull);
 
-  /* 两颊：改用头部贴图上的浅色渐显，不再加实体球 */
+  /* 白色面部（柯基标志性的白脸） */
+  const blaze = sph(.31,C.cream,.84,.9,.92,32);
+  blaze.position.set(0,-.055,.17); head.add(blaze);
 
+  /* 口鼻（小而圆） */
+  const muzzle = sph(.155,C.cream,1.3,.88,1.05,28);
+  muzzle.position.set(0,-.155,.3); head.add(muzzle);
 
-  /* ============ 口鼻：小、圆、干净 ============ */
-  const MZ = {x:0, y:-.185, z:.315};
-  const muzzle = new THREE.Mesh(new THREE.SphereGeometry(.128, 72, 56), creamMat);
-  muzzle.scale.set(1.30, .88, 1.02);
-  muzzle.position.set(MZ.x, MZ.y, MZ.z);
-  muzzle.castShadow = true;
-  head.add(muzzle);
+  /* 鼻子 */
+  const nose = sph(.058,C.nose,1.25,.8,.75,20);
+  nose.position.set(0,-.095,.42); head.add(nose);
+  const noseHi = sph(.016,0xffffff,1,1,1,10);
+  noseHi.position.set(-.022,-.06,.455); head.add(noseHi);
 
-  /* 鼻子：湿润感（低粗糙度 + 高光） */
-  const nose = new THREE.Mesh(new THREE.SphereGeometry(.048, 48, 36), noseMat);
-  nose.scale.set(1.32, .90, .92);
-  nose.position.set(0, -.132, MZ.z + .128);
-  head.add(nose);
-  const noseHi = new THREE.Mesh(new THREE.SphereGeometry(.016, 24, 18), new THREE.MeshBasicMaterial({color:0xffffff}));
-  noseHi.position.set(-.014, -.116, MZ.z + .168);
-  noseHi.scale.set(1.1, .8, .6);
-  head.add(noseHi);
-
-  /* 嘴：一条柔和的微笑弧 */
-  const smile = new THREE.Mesh(new THREE.TorusGeometry(.042, .0072, 10, 28, Math.PI*0.92), inkMat);
-  smile.position.set(0, -.216, MZ.z + .100);
-  smile.rotation.set(0, 0, Math.PI*0.04);
+  /* 微笑 + 舌头 */
+  const smile = new THREE.Mesh(new THREE.TorusGeometry(.062,.014,8,24,Math.PI), mat(C.nose,{roughness:.6}));
+  smile.position.set(0,-.185,.4);
+  smile.rotation.z = Math.PI;
+  smile.scale.set(1,.72,1);
   head.add(smile);
+  const tongue = new THREE.Mesh(new THREE.SphereGeometry(.055,20,14), mat(C.pinkD,{roughness:.55}));
+  tongue.position.set(0,-.235,.38); tongue.scale.set(1,.9,.55);
+  tongue.castShadow = true; head.add(tongue);
 
-  /* 舌头 */
-  const tongue = new THREE.Mesh(new THREE.SphereGeometry(.036, 32, 24), tongueMat);
-  tongue.scale.set(.92, 1.05, .46);
-  tongue.position.set(0, -.246, MZ.z + .086);
-  head.add(tongue);
-
-  /* ============ 眼睛：迪士尼核心 —— 大、亮、有眼白 ============ */
+  /* 眼睛：超大、圆、双高光 */
   const eyes = [];
   for (const s of [-1,1]){
-    const eyeG = new THREE.Group();
-    const ex = s*.176, ey = .052;
-    eyeG.position.set(ex, ey, surfZ(0,0,0,HR*1.06,HR*.955,HR*.95, ex, ey) - .052);
-    eyeG.rotation.y = s*.30;
-
-    /* 眼白（杏仁形，略扁） */
-    const white = new THREE.Mesh(new THREE.SphereGeometry(.098, 48, 36), whiteMat);
-    white.scale.set(1.0, 1.12, .55);
-    eyeG.add(white);
-
-    /* 虹膜（深棕，带渐变感） */
-    const iris = new THREE.Mesh(new THREE.SphereGeometry(.082, 48, 36), irisMat);
-    iris.scale.set(1.0, 1.10, .42);
-    iris.position.set(0, 0, .036);
-    eyeG.add(iris);
-
-    /* 瞳孔 */
-    const pupil = new THREE.Mesh(new THREE.SphereGeometry(.058, 40, 30), pupilMat);
-    pupil.scale.set(1.0, 1.08, .38);
-    pupil.position.set(0, .002, .060);
-    eyeG.add(pupil);
-
-    /* 主高光：大而亮，放右上 */
-    const hl1 = new THREE.Mesh(new THREE.SphereGeometry(.032, 28, 22), new THREE.MeshBasicMaterial({color:0xffffff}));
-    hl1.scale.set(1, 1, .42);
-    hl1.position.set(.022, .030, .082);
-    eyeG.add(hl1);
-    /* 次高光：左下小点 */
-    const hl2 = new THREE.Mesh(new THREE.SphereGeometry(.014, 20, 16), new THREE.MeshBasicMaterial({color:0xffffff}));
-    hl2.scale.set(1, 1, .42);
-    hl2.position.set(-.026, -.030, .082);
-    eyeG.add(hl2);
-
-    /* 上眼睑：用一小片深色球面压住眼白上缘，形成自然眼皮（不是画线） */
-    const lid = new THREE.Mesh(new THREE.SphereGeometry(.100, 40, 30, 0, Math.PI*2, 0, Math.PI*0.42), furMat);
-    lid.scale.set(1.0, 1.10, .60);
-    lid.position.set(0, .016, -.004);
-    lid.rotation.x = -.16;
-    eyeG.add(lid);
-
-    head.add(eyeG); eyes.push(eyeG);
+    const eg = new THREE.Group();
+    eg.position.set(s*.162,.035,.315);
+    const e = sph(.085,C.eye,1,1.06,.8,24);
+    eg.add(e);
+    const h1 = sph(.03,0xffffff,1,1,1,14);
+    h1.position.set(.026,.032,.052); eg.add(h1);
+    const h2 = sph(.014,0xffffff,1,1,1,10);
+    h2.position.set(-.028,-.028,.05); eg.add(h2);
+    head.add(eg); eyes.push(eg);
+    /* 腮红 */
+    const ch = sph(.072,C.pink,1,.66,.32,18,{roughness:.92});
+    ch.position.set(s*.268,-.105,.19); head.add(ch);
   }
 
-  /* 黄褐色圆点眉 */
-  for (const s of [-1,1]){
-    const bz = surfZ(0,0,0,HR*1.06,HR*.955,HR*.95, s*.170, .215);
-    const brow = new THREE.Mesh(new THREE.SphereGeometry(.044, 32, 24), browMat);
-    brow.scale.set(1.35, .62, .30);
-    brow.position.set(s*.170, .215, bz - .012);
-    head.add(brow);
-  }
-
-  /* 腮红：极淡，柔边 */
-  for (const s of [-1,1]){
-    const cz = surfZ(0,0,0,HR*1.06,HR*.955,HR*.95, s*.268, -.115);
-    const bl = new THREE.Mesh(new THREE.SphereGeometry(.082, 40, 30), blushMat);
-    bl.scale.set(1, .78, .16);
-    bl.position.set(s*.268, -.115, cz - .020);
-    head.add(bl);
-  }
-
-  /* ============ 耳朵：圆润立耳 ============ */
+  /* 耳朵：大而圆润 */
   const ears = [];
   for (const s of [-1,1]){
     const ear = new THREE.Group();
-    ear.position.set(s*.205, .235, -.045);
-    ear.rotation.z = s*.34;
-    ear.rotation.x = -.04;
-
-    /* 外耳：宽底圆顶，长度只有宽度的 1.35 倍 */
-    const outer = new THREE.Mesh(new THREE.SphereGeometry(.128, 56, 44), furMat);
-    outer.scale.set(1.0, 1.38, .58);
-    outer.position.y = .092;
-    outer.castShadow = true;
-    ear.add(outer);
-
-    /* 内耳粉色，贴合外耳内壁 */
-    const inner = new THREE.Mesh(new THREE.SphereGeometry(.098, 48, 36), earMat);
-    inner.scale.set(.62, 1.26, .24);
-    inner.position.set(0, .105, .052);
-    ear.add(inner);
-
+    ear.position.set(s*.225,.27,-.02);
+    ear.rotation.z = s*.17;
+    ear.rotation.x = -.1;
+    const outer = new THREE.Mesh(earGeo(.36,.14), mat(C.fur,{roughness:.86}));
+    outer.castShadow = true; ear.add(outer);
+    const inner = new THREE.Mesh(earGeo(.27,.088), mat(C.pink,{roughness:.9}));
+    inner.position.set(0,.02,.045); ear.add(inner);
     head.add(ear); ears.push(ear);
   }
 
-  /* ============ 围巾 ============ */
-  const scarf = new THREE.Mesh(new THREE.TorusGeometry(.222, .054, 20, 64), scarfMat);
-  scarf.position.set(0, .795, .045);
+  /* 头顶小橘斑（更柯基） */
+  const capL = sph(.14,C.furD,.9,.5,.9,18);
+  capL.position.set(-.19,.29,.11); head.add(capL);
+  const capR = sph(.14,C.furD,.9,.5,.9,18);
+  capR.position.set(.19,.29,.11); head.add(capR);
+
+  /* 围巾 */
+  const scarf = new THREE.Mesh(new THREE.TorusGeometry(.215,.062,12,32), mat(C.pinkD,{roughness:.85}));
+  scarf.position.set(0,.74,.22);
   scarf.rotation.x = Math.PI/2 - .16;
-  scarf.scale.set(1, 1, .92);
-  scarf.castShadow = true;
-  body.add(scarf);
-  const knot = new THREE.Mesh(new THREE.SphereGeometry(.052, 32, 24), scarfDMat);
-  knot.position.set(0, .775, .268);
-  body.add(knot);
-  for (const s of [-1,1]){
-    const bow = new THREE.Mesh(new THREE.SphereGeometry(.052, 32, 24), scarfDMat);
-    bow.scale.set(1.30, .84, .52);
-    bow.position.set(s*.075, .778, .281);
-    bow.rotation.z = s*.26;
-    body.add(bow);
-  }
+  scarf.castShadow = true; body.add(scarf);
+  const scarfEnd = box(.115,.2,.05,C.pinkD);
+  scarfEnd.position.set(.16,.6,.27); scarfEnd.rotation.z = .3; body.add(scarfEnd);
 
-  g.position.set(.92, 0, .42);
+  /* 命中区 */
+  const hit = new THREE.Mesh(new THREE.SphereGeometry(.78,10,8), new THREE.MeshBasicMaterial({visible:false}));
+  hit.position.set(0,.62,.1); g.add(hit);
+
+  g.position.set(.9,0,.34);
   g.rotation.y = -.5;
-  g.scale.setScalar(.82);
-
-  const hit = new THREE.Mesh(new THREE.SphereGeometry(.95, 10, 8), new THREE.MeshBasicMaterial({visible:false}));
-  hit.position.set(0, .7, .06); g.add(hit);
-
-  g.userData = {body, head, ears, tail, eyes, tongue, hit, baseRotY:-.5, basePos:g.position.clone()};
+  g.userData = {
+    body, head, ears, eyes, tail, tongue, frontLegs, backLegs, hit,
+    basePos: g.position.clone(), baseRotY: -.5
+  };
   return g;
 }
 const corgi = buildCorgi();
 scene.add(corgi);
 
-const hitH = new THREE.Mesh(new THREE.SphereGeometry(.9,10,8), new THREE.MeshBasicMaterial({visible:false}));
+/* 软接触阴影 */
+const shadowTex = (()=>{
+  const c = document.createElement('canvas'); c.width = c.height = 128;
+  const x = c.getContext('2d');
+  const g = x.createRadialGradient(64,64,4,64,64,62);
+  g.addColorStop(0,'rgba(120,70,40,.34)');
+  g.addColorStop(.55,'rgba(120,70,40,.15)');
+  g.addColorStop(1,'rgba(120,70,40,0)');
+  x.fillStyle = g; x.fillRect(0,0,128,128);
+  return new THREE.CanvasTexture(c);
+})();
+const dogShadow = new THREE.Mesh(new THREE.PlaneGeometry(1.5,1.5),
+  new THREE.MeshBasicMaterial({map:shadowTex, transparent:true, depthWrite:false}));
+dogShadow.rotation.x = -Math.PI/2; dogShadow.position.y = .005;
+scene.add(dogShadow);
+
+/* 人类热区 */
+const hitH = new THREE.Mesh(new THREE.SphereGeometry(.8,10,8), new THREE.MeshBasicMaterial({visible:false}));
 hitH.position.set(0,.95,0);
 human.add(hitH);
+human.userData.hit = hitH;
 
 /* ================= 浮尘 ================= */
 const motes = [];
-for (let i=0;i<22;i++){
-  const m = new THREE.Mesh(new THREE.BoxGeometry(.032,.032,.032), new THREE.MeshBasicMaterial({color:0xffe2b4, transparent:true, opacity:.7}));
-  m.position.set((Math.random()-.5)*9, .4+Math.random()*3.6, (Math.random()-.5)*6-.8);
-  m.userData = {ph:Math.random()*Math.PI*2, sp:.25+Math.random()*.4};
+for (let i=0;i<26;i++){
+  const m = sph(.028,0xfff0d8,1,1,1,8,{emissive:0xffd9a0, emissiveIntensity:.7, transparent:true, opacity:.7});
+  m.castShadow = false;
+  m.position.set((Math.random()-.5)*9,.5+Math.random()*3.6,(Math.random()-.5)*6-.9);
+  m.userData = {ph:Math.random()*Math.PI*2, sp:.3+Math.random()*.45};
   scene.add(m); motes.push(m);
 }
 
 /* ================= 爱心 ================= */
-const heartTex = tex(9,8,(x)=>{
+const heartTex = (()=>{
+  const c = document.createElement('canvas'); c.width = c.height = 64;
+  const x = c.getContext('2d');
   x.fillStyle = '#ff7f9e';
-  [[1,0],[2,0],[6,0],[7,0],[0,1],[1,1],[2,1],[3,1],[4,1],[5,1],[6,1],[7,1],[8,1],
-   [0,2],[1,2],[2,2],[3,2],[4,2],[5,2],[6,2],[7,2],[8,2],
-   [1,3],[2,3],[3,3],[4,3],[5,3],[6,3],[7,3],
-   [2,4],[3,4],[4,4],[5,4],[6,4],[3,5],[4,5],[5,5],[4,6]].forEach(([a,b])=>x.fillRect(a,b,1,1));
-  x.fillStyle = '#ffd6e0'; x.fillRect(2,1,1,1); x.fillRect(6,1,1,1);
-});
+  x.beginPath();
+  x.moveTo(32,55);
+  x.bezierCurveTo(-8,25,12,0,32,17);
+  x.bezierCurveTo(52,0,72,25,32,55);
+  x.fill();
+  x.fillStyle = 'rgba(255,255,255,.55)';
+  x.beginPath(); x.ellipse(22,20,6,4.5,-.5,0,7); x.fill();
+  const t = new THREE.CanvasTexture(c);
+  t.colorSpace = THREE.SRGBColorSpace;
+  return t;
+})();
 const hearts = [];
 function spawnHearts(pos, n){
   for (let i=0;i<n;i++){
-    const mat = new THREE.SpriteMaterial({map:heartTex, transparent:true, depthWrite:false, opacity:1});
-    const sp = new THREE.Sprite(mat);
-    const sc = .2+Math.random()*.18;
-    sp.scale.set(sc,sc,1);
-    sp.position.set(pos.x+(Math.random()-.5)*.7, pos.y+Math.random()*.35, pos.z+(Math.random()-.5)*.7);
-    sp.userData = {vy:.62+Math.random()*.5, vx:(Math.random()-.5)*.32, life:1.5+Math.random()*.7, age:0};
+    const sp = new THREE.Sprite(new THREE.SpriteMaterial({map:heartTex, transparent:true, depthWrite:false, opacity:1}));
+    const s = .2+Math.random()*.2;
+    sp.scale.set(s,s,1);
+    sp.position.set(pos.x+(Math.random()-.5)*.75, pos.y+Math.random()*.35, pos.z+(Math.random()-.5)*.75);
+    sp.userData = {vy:.6+Math.random()*.5, vx:(Math.random()-.5)*.34, life:1.5+Math.random()*.7, age:0};
     scene.add(sp); hearts.push(sp);
   }
 }
 
-/* ================= 高清文字 ================= */
-const DPR = Math.min(3, Math.max(2, window.devicePixelRatio || 2));
-function rr(x, px, py, w, h, r){
-  x.beginPath();
-  x.moveTo(px+r, py);
-  x.arcTo(px+w, py, px+w, py+h, r);
-  x.arcTo(px+w, py+h, px, py+h, r);
-  x.arcTo(px, py+h, px, py, r);
-  x.arcTo(px, py, px+w, py, r);
-  x.closePath();
-}
-function makeText(text, opt){
-  opt = opt || {};
-  const fs = opt.fs || 13;
-  const padX = opt.padX != null ? opt.padX : (opt.bg ? 11 : 2);
-  const padY = opt.padY != null ? opt.padY : (opt.bg ? 7 : 2);
-  const font = '700 ' + fs + 'px "PingFang SC","Hiragino Sans GB","Noto Sans CJK SC",system-ui,sans-serif';
-  const meas = document.createElement('canvas').getContext('2d');
-  meas.font = font;
-  const tw = Math.ceil(meas.measureText(text).width);
-  const w = tw + padX*2;
-  const h = fs + padY*2;
-  const c = document.createElement('canvas');
-  c.width = Math.ceil(w*DPR); c.height = Math.ceil(h*DPR);
-  const x = c.getContext('2d');
-  x.scale(DPR,DPR);
-  x.font = font; x.textBaseline = 'middle'; x.textAlign = 'left';
-  if (opt.bg){
-    x.fillStyle = opt.border || '#4a3226';
-    rr(x, 0, 0, w, h, 8); x.fill();
-    x.fillStyle = opt.bg;
-    rr(x, 1.6, 1.6, w-3.2, h-3.2, 6.6); x.fill();
-    if (opt.tail){
-      x.fillStyle = opt.border || '#4a3226';
-      x.beginPath(); x.moveTo(w/2-5, h-2); x.lineTo(w/2, h+4); x.lineTo(w/2+5, h-2); x.closePath(); x.fill();
-      x.fillStyle = opt.bg;
-      x.beginPath(); x.moveTo(w/2-3.2, h-2.6); x.lineTo(w/2, h+2.2); x.lineTo(w/2+3.2, h-2.6); x.closePath(); x.fill();
-    }
-  }
-  if (opt.shadow){
-    x.fillStyle = opt.border || '#2a1b13';
-    x.fillText(text, padX+1.2, h/2+1.2);
-  }
-  x.fillStyle = opt.fg || '#fff';
-  x.fillText(text, padX, h/2);
-  c.style.width = w+'px'; c.style.height = h+'px';
-  return c;
-}
-const tagDog = makeText('炸炸炸鸡',{bg:'#fffbf4',fg:'#c2611f',border:'#4a3226',fs:12});
-tagDog.className = 'lbl';
-const tagH = makeText('hhz',{bg:'#eefaf3',fg:'#2b7a52',border:'#4a3226',fs:12});
-tagH.className = 'lbl';
+/* ================= UI 文字（原生清晰字体） ================= */
+const tagDog = document.createElement('div');
+tagDog.className = 'lbl dog';
+tagDog.innerHTML = '🐾 <b>炸炸炸鸡</b>';
 document.body.appendChild(tagDog);
-document.body.appendChild(tagH);
 
-const titleCv = document.getElementById('titleCv');
-const subCv = document.getElementById('subCv');
-(function(){
-  const t = makeText('炸炸炸鸡 & hhz',{fg:'#fff7e8',shadow:true,border:'#3a2418',fs:17});
-  titleCv.width = t.width; titleCv.height = t.height;
-  titleCv.getContext('2d').drawImage(t,0,0);
-  titleCv.style.width = t.style.width; titleCv.style.height = t.style.height;
-  const u = makeText('像素小房间 · 拖一下换角度',{fg:'#ffe4c6',shadow:true,border:'#3a2418',fs:11});
-  subCv.width = u.width; subCv.height = u.height;
-  subCv.getContext('2d').drawImage(u,0,0);
-  subCv.style.width = u.style.width; subCv.style.height = u.style.height;
-})();
+const tagMan = document.createElement('div');
+tagMan.className = 'lbl man';
+tagMan.innerHTML = '<b>hhz</b> 🧡';
+document.body.appendChild(tagMan);
 
-let bubble = null, bubbleOwner = 'dog';
+const bubbleEl = document.createElement('div');
+bubbleEl.id = 'bub';
+document.body.appendChild(bubbleEl);
+let bubbleOwner = 'dog';
+
 function showBubble(text, owner, ms){
-  if (bubble) bubble.remove();
-  bubble = makeText(text,{bg:'#ffffff',fg:'#4a3020',border:'#4a3226',fs:13,padX:12,padY:8,tail:true});
-  bubble.id = 'bub';
   bubbleOwner = owner || 'dog';
-  document.body.appendChild(bubble);
-  requestAnimationFrame(()=>{ if (bubble) bubble.classList.add('on'); });
+  bubbleEl.textContent = text;
+  bubbleEl.classList.add('on');
   clearTimeout(showBubble.t);
-  showBubble.t = setTimeout(()=>{ if (bubble) bubble.classList.remove('on'); }, ms || 2000);
+  showBubble.t = setTimeout(()=>bubbleEl.classList.remove('on'), ms || 2100);
 }
 
-/* ================= 音效 ================= */
+/* ================= 声音 ================= */
 let actx = null;
 function blip(freq, dur, type){
   try{
     if (!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
-    const o = actx.createOscillator(), gn = actx.createGain();
-    o.type = type || 'triangle';
+    const o = actx.createOscillator(), g = actx.createGain();
+    o.type = type || 'sine';
     o.frequency.value = freq;
-    gn.gain.value = .0001;
-    o.connect(gn); gn.connect(actx.destination);
     const t0 = actx.currentTime;
-    gn.gain.exponentialRampToValueAtTime(.038, t0+.012);
-    gn.gain.exponentialRampToValueAtTime(.0001, t0+(dur||.14));
-    o.start(t0); o.stop(t0+(dur||.14)+.02);
+    g.gain.setValueAtTime(.0001, t0);
+    g.gain.exponentialRampToValueAtTime(.04, t0+.014);
+    g.gain.exponentialRampToValueAtTime(.0001, t0+(dur||.15));
+    o.connect(g); g.connect(actx.destination);
+    o.start(t0); o.stop(t0+(dur||.15)+.03);
   }catch(_){}
 }
 
-/* ================= 相机 ================= */
+/* ================= 相机 & 拖动（高灵敏度） ================= */
 const YAW_K = 0.0145, PIT_K = 0.0100;
-let yawT = .18, pitchT = 1.17, distT = 6.2;
+let yawT = .14, pitchT = 1.18, distT = 6.2;
 let yaw = yawT, pitch = pitchT, dist = 9.5;
 let spin = true, dragging = false, lastX = 0, lastY = 0, lastAct = 0, moved = 0;
-const target = new THREE.Vector3(0,.88,.06);
+const target = new THREE.Vector3(0,.85,.05);
 const raycaster = new THREE.Raycaster();
 const ndc = new THREE.Vector2();
 
@@ -984,7 +783,7 @@ gl.addEventListener('pointermove', e=>{
   lastX = e.clientX; lastY = e.clientY;
   moved += Math.abs(dx)+Math.abs(dy);
   yawT -= dx*YAW_K;
-  pitchT = Math.min(1.55, Math.max(.72, pitchT-dy*PIT_K));
+  pitchT = Math.min(1.54, Math.max(.72, pitchT - dy*PIT_K));
   lastAct = performance.now();
 });
 function endDrag(e){
@@ -994,8 +793,8 @@ function endDrag(e){
   lastAct = performance.now();
   if (moved < 10){
     const who = pick(e.clientX, e.clientY);
-    if (who === 'dog') reactDog(true);
-    else if (who === 'human') reactHuman(true);
+    if (who === 'dog') reactDog();
+    else if (who === 'human') reactHuman();
   }
 }
 gl.addEventListener('pointerup', endDrag);
@@ -1010,7 +809,7 @@ gl.addEventListener('touchstart', e=>{
 gl.addEventListener('touchmove', e=>{
   if (e.touches.length === 2 && pinch){
     const d = Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
-    distT = Math.min(10, Math.max(3.1, distT*(pinch/d)));
+    distT = Math.min(9.5, Math.max(3.2, distT*(pinch/d)));
     pinch = d; lastAct = performance.now();
     e.preventDefault();
   }
@@ -1018,141 +817,147 @@ gl.addEventListener('touchmove', e=>{
 gl.addEventListener('touchend', ()=>{ pinch = 0; }, {passive:true});
 gl.addEventListener('wheel', e=>{
   e.preventDefault();
-  distT = Math.min(10, Math.max(3.1, distT+e.deltaY*.0035));
+  distT = Math.min(9.5, Math.max(3.2, distT + e.deltaY*.0035));
   lastAct = performance.now();
 }, {passive:false});
 
-/* ================= 反应台词 ================= */
+/* ================= 反应 ================= */
 const DOG_LINES = [
-  { t:'汪！', a:'jump', f:540 },
-  { t:'嗷呜——', a:'howl', f:390 },
-  { t:'（原地转圈圈）', a:'spin', f:670 },
-  { t:'（把球叼过来了）', a:'toy', f:590 },
-  { t:'尾巴摇成螺旋桨', a:'wag', f:710 },
-  { t:'（歪头看你）', a:'tilt', f:490 },
-  { t:'咕噜咕噜…', a:'roll', f:430 },
-  { t:'（把肚皮翻给你）', a:'belly', f:570 }
+  { t:'汪！',             a:'jump',  f:560 },
+  { t:'嗷呜～',           a:'howl',  f:400 },
+  { t:'（原地转圈）',      a:'spin',  f:690 },
+  { t:'（歪头看你）',      a:'tilt',  f:500 },
+  { t:'（尾巴摇成螺旋桨）', a:'wag',   f:720 },
+  { t:'（把肚皮翻给你）',   a:'belly', f:580 },
+  { t:'（叼来小网球）',     a:'toy',   f:620 },
+  { t:'（蹭了蹭你的手）',   a:'nudge', f:520 }
 ];
 const HUMAN_LINES = [
-  { t:'嗯？怎么啦', a:'nod', f:450 },
-  { t:'过来，让我抱一下', a:'open', f:410 },
-  { t:'刚烤的饼干，要吗', a:'hand', f:510 },
+  { t:'嗯？怎么啦',        a:'nod',   f:450 },
+  { t:'过来，让我抱一下',   a:'open',  f:410 },
+  { t:'刚烤的饼干，要吗',   a:'hand',  f:510 },
   { t:'今天也有好好吃饭吗', a:'smile', f:470 },
-  { t:'别闹，我在看它呢', a:'lean', f:430 },
-  { t:'炸炸今天特别乖', a:'pet', f:530 },
-  { t:'再坐一会儿吧', a:'pat', f:410 },
-  { t:'…你比它可爱', a:'shy', f:490 }
+  { t:'别闹，我在看它呢',   a:'lean',  f:430 },
+  { t:'炸炸今天特别乖',     a:'pet',   f:530 },
+  { t:'再坐一会儿吧',       a:'pat',   f:410 },
+  { t:'…你比它可爱',       a:'shy',   f:490 }
 ];
 let dogIdx = -1, humIdx = -1;
 let react = {who:null, kind:null, t0:0, dur:0};
 
-function reactDog(clicked){
+function reactDog(){
   let i = Math.floor(Math.random()*DOG_LINES.length);
-  if (i === dogIdx) i = (i+1)%DOG_LINES.length;
+  if (i === dogIdx) i = (i+1) % DOG_LINES.length;
   dogIdx = i;
   const r = DOG_LINES[i];
-  react = {who:'dog', kind:r.a, t0:performance.now(), dur:1300};
-  showBubble(r.t, 'dog', 2000);
-  blip(r.f, .13, 'triangle');
+  react = {who:'dog', kind:r.a, t0:performance.now(), dur:1400};
+  showBubble(r.t, 'dog');
+  blip(r.f, .14, 'triangle');
   const p = new THREE.Vector3();
-  corgi.userData.head.getWorldPosition(p); p.y += .5;
-  spawnHearts(p, clicked ? 6 : 4);
+  corgi.userData.head.getWorldPosition(p); p.y += .55;
+  spawnHearts(p, 5);
 }
-function reactHuman(clicked){
+function reactHuman(){
   let i = Math.floor(Math.random()*HUMAN_LINES.length);
-  if (i === humIdx) i = (i+1)%HUMAN_LINES.length;
+  if (i === humIdx) i = (i+1) % HUMAN_LINES.length;
   humIdx = i;
   const r = HUMAN_LINES[i];
-  react = {who:'human', kind:r.a, t0:performance.now(), dur:1400};
-  showBubble(r.t, 'human', 2100);
-  blip(r.f, .15, 'sine');
+  react = {who:'human', kind:r.a, t0:performance.now(), dur:1500};
+  showBubble(r.t, 'human');
+  blip(r.f, .16, 'sine');
   const p = new THREE.Vector3();
   if (r.a === 'open' || r.a === 'pat' || r.a === 'pet'){
-    corgi.userData.head.getWorldPosition(p); p.y += .45; spawnHearts(p, 5);
-  } else if (r.a === 'shy'){
-    human.userData.headG.getWorldPosition(p); p.y += .45; spawnHearts(p, 4);
+    corgi.userData.head.getWorldPosition(p); p.y += .5;
+  } else {
+    human.userData.headG.getWorldPosition(p); p.y += .46;
   }
+  spawnHearts(p, 4);
 }
 
 /* ================= 抱抱 ================= */
-let hugging = false, petUntil = 0;
-const chestLocal = new THREE.Vector3(-.02,.62,.56);
+let hugging = false;
 const hintEl = document.getElementById('hint');
+const hugSpot = new THREE.Vector3();
 
 function toggleHug(){
   hugging = !hugging;
   document.getElementById('bHug').classList.toggle('on', hugging);
-  const p = new THREE.Vector3();
   if (hugging){
     react = {who:null, kind:null, t0:0, dur:0};
-    corgi.userData.head.getWorldPosition(p); p.y += .4;
+    const p = new THREE.Vector3();
+    corgi.userData.head.getWorldPosition(p); p.y += .45;
     spawnHearts(p, 14);
-    showBubble('抱住啦～', 'dog', 2400);
-    blip(700, .18, 'sine');
-    setTimeout(()=>{ if (hugging) blip(880, .2, 'sine'); }, 140);
-    human.userData.headG.getWorldPosition(p); p.y += .4;
-    spawnHearts(p, 6);
+    showBubble('抱住啦～', 'dog', 2500);
+    blip(720, .18, 'sine');
+    setTimeout(()=>{ if (hugging) blip(900, .2, 'sine'); }, 150);
   } else {
-    showBubble('汪！还想再抱', 'dog', 1600);
-    blip(520, .12, 'triangle');
+    showBubble('汪！还想再抱', 'dog', 1700);
+    blip(540, .12, 'triangle');
   }
   if (!hintEl.dataset.done){ hintEl.dataset.done = '1'; hintEl.style.opacity = 0; }
 }
 
+/* ================= 按钮 ================= */
 document.getElementById('bHug').onclick = toggleHug;
-document.getElementById('bPet').onclick = ()=>{ petUntil = performance.now()+1300; reactDog(false); };
+document.getElementById('bPet').onclick = ()=>{ petUntil = performance.now()+1400; reactDog(); };
 
+let petUntil = 0;
 const bLight = document.getElementById('bLight');
 let night = false;
 bLight.onclick = ()=>{
   night = !night;
   bLight.classList.toggle('on', night);
   if (night){
-    key.intensity = .6; key.color.set(0xafc3ff);
-    hemi.intensity = .58; hemi.color.set(0xc8d4ff); hemi.groundColor.set(0x3e3956);
-    lampLight.intensity = 11; fill.intensity = .72;
-    scene.fog.color.set(0x1f2842); scene.background.set(0x1f2842);
-    wall.material.color.set(0x94a1c9); floor.material.color.set(0x9eabca);
+    key.intensity = .7; key.color.set(0xbcd0ff);
+    rim.intensity = 1.0; rim.color.set(0x9fb4ff);
+    warmFill.intensity = 13;
+    ambient.intensity = .22; ambient.color.set(0xc8d4ff);
+    faceFill.intensity = 2.2; faceFill.color.set(0xc9d6ff);
+    scene.background.set(0x2a3350); scene.fog.color.set(0x2a3350);
+    wall.material.color.set(0x9aa8d0);
+    floor.material.color.set(0x8e9ec4);
   } else {
-    key.intensity = 1.85; key.color.set(0xffddb4);
-    hemi.intensity = 1.4; hemi.color.set(0xffe8ca); hemi.groundColor.set(0x7a5840);
-    lampLight.intensity = 6.5; fill.intensity = .5;
-    scene.fog.color.set(0x3f2c1e); scene.background.set(0x2a1b13);
-    wall.material.color.set(0xffffff); floor.material.color.set(0xffffff);
+    key.intensity = 2.5; key.color.set(0xffe8cf);
+    rim.intensity = .85; rim.color.set(0xbfd4ff);
+    warmFill.intensity = 9;
+    ambient.intensity = .35; ambient.color.set(0xfff0e0);
+    faceFill.intensity = 4.5; faceFill.color.set(0xfff2e0);
+    scene.background.set(0xf6e2ce); scene.fog.color.set(0xf6e2ce);
+    wall.material.color.set(0xffffff);
+    floor.material.color.set(0xffffff);
   }
 };
 const bSpin = document.getElementById('bSpin');
 bSpin.onclick = ()=>{ spin = !spin; bSpin.classList.toggle('on', spin); };
+bSpin.classList.add('on');
 
 /* ================= 标签定位 ================= */
 const v3 = new THREE.Vector3();
 function placeLabel(el, obj, dy){
-  if (!el) return;
   obj.getWorldPosition(v3); v3.y += dy;
   v3.project(camera);
   if (v3.z > 1 || v3.z < -1){ el.classList.remove('on'); return; }
   el.classList.add('on');
-  const x = (v3.x*.5+.5)*innerWidth, y = (-v3.y*.5+.5)*innerHeight;
+  const x = (v3.x*.5+.5)*innerWidth;
+  const y = (-v3.y*.5+.5)*innerHeight;
   el.style.transform = 'translate(-50%,-100%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
 }
-const anchorDog = new THREE.Object3D(); anchorDog.position.set(0,1.72,.02); corgi.add(anchorDog);
-const anchorH = new THREE.Object3D(); anchorH.position.set(0,2.06,.02); human.add(anchorH);
+const anchorDog = new THREE.Object3D(); anchorDog.position.set(0,1.5,.06); corgi.add(anchorDog);
+const anchorMan = new THREE.Object3D(); anchorMan.position.set(0,1.95,.06); human.add(anchorMan);
 
 /* ================= 主循环 ================= */
 const clock = new THREE.Clock();
-let blinkAt = 2.2, blinkT = 0, heartIdle = 4;
-const _q = new THREE.Quaternion();
-const _p = new THREE.Vector3();
+let blinkAt = 2.4, blinkT = 0, heartIdle = 6;
+const chestLocal = new THREE.Vector3(.02,.62,.58);
 
-function loop(){
-  requestAnimationFrame(loop);
+function tick(){
+  requestAnimationFrame(tick);
   const dt = Math.min(clock.getDelta(), .05);
   const t = clock.elapsedTime;
   const now = performance.now();
-  const U = corgi.userData;
-  const manU = human.userData;
 
-  if (spin && !dragging && now-lastAct > 1400) yawT += dt*.16;
+  /* 相机 */
+  if (spin && !dragging && now-lastAct > 1400) yawT += dt*.17;
   yaw += (yawT-yaw)*.18;
   pitch += (pitchT-pitch)*.18;
   dist += (distT-dist)*.12;
@@ -1164,188 +969,206 @@ function loop(){
   );
   camera.lookAt(target);
 
+  const U = corgi.userData;
   const rActive = react.kind && (now-react.t0) < react.dur;
   const rp = rActive ? (now-react.t0)/react.dur : 0;
 
-  /* 待机呼吸 */
-  const br = Math.sin(t*1.7)*.013;
-  U.body.scale.set(1+br, 1+br*1.3, 1+br);
+  /* 呼吸 */
+  const br = Math.sin(t*1.8)*.013;
+  U.body.scale.set(1+br, 1+br*1.25, 1+br);
   U.body.position.y = br*1.4;
-  U.tail.rotation.z = Math.sin(t*3.6)*.26;
-  U.tail.rotation.x = Math.sin(t*2.4)*.11;
-  U.head.rotation.y = Math.sin(t*.6)*.15-.06;
-  U.head.rotation.x = Math.sin(t*.85)*.045;
-  U.head.rotation.z = Math.sin(t*.42)*.028;
-  U.tongue.scale.y = 1.25+Math.sin(t*6)*.1;
+
+  /* 尾巴 / 头 / 耳朵 */
+  U.tail.rotation.z = Math.sin(t*3.8)*.3;
+  U.tail.rotation.x = Math.sin(t*2.5)*.13;
+  U.head.rotation.y = Math.sin(t*.62)*.16 - .06;
+  U.head.rotation.x = .04 + Math.sin(t*.88)*.05;
+  U.head.rotation.z = Math.sin(t*.45)*.025;
+  U.tongue.scale.y = .95 + Math.sin(t*5)*.12;
   for (let i=0;i<2;i++){
     const s = i?1:-1;
-    U.ears[i].rotation.z = s*.2+Math.sin(t*1.5+i)*.05;
+    U.ears[i].rotation.z = s*.17 + Math.sin(t*1.6+i)*.055;
+    U.ears[i].rotation.x = -.1 + Math.sin(t*1.2+i)*.04;
   }
 
   /* 摸摸 */
   const petting = now < petUntil;
   if (petting){
     corgi.position.y = Math.abs(Math.sin(t*15))*.16;
-    U.tail.rotation.z = Math.sin(t*24)*.58;
-    U.head.rotation.z = Math.sin(t*11)*.08;
-    U.eyes.forEach(e=>{ e.scale.y = .3; });
-    manU.S.rotation.z = Math.sin(t*9)*.012;
-    manU.armR.userData.hand.position.y = manU.armR.userData.hand0.y+Math.sin(t*13)*.045;
+    U.tail.rotation.z = Math.sin(t*26)*.6;
+    U.head.rotation.z = Math.sin(t*12)*.09;
+    U.eyes.forEach(e=>{ e.scale.y = .38; });
+    human.userData.S.rotation.z = Math.sin(t*9)*.01;
   } else {
-    blinkAt -= dt;
-    if (blinkAt <= 0){ blinkT = .16; blinkAt = 2.6+Math.random()*3.2; }
-    let eyeY = 1;
-    if (blinkT > 0){ blinkT -= dt; eyeY = Math.max(.14, Math.abs(blinkT/.16-.5)*2); }
-    U.eyes.forEach(e=>{ e.scale.y = eyeY; });
+    U.eyes.forEach(e=>{
+      blinkAt -= dt;
+      if (blinkAt <= 0){ blinkT = .15; blinkAt = 2.8+Math.random()*3.4; }
+      let eyeY = 1;
+      if (blinkT > 0){ blinkT -= dt; eyeY = Math.max(.1, Math.abs(blinkT/.15-.5)*2); }
+      e.scale.y = eyeY;
+    });
   }
 
   /* 狗狗反应 */
   if (rActive && react.who === 'dog'){
     const k = Math.sin(rp*Math.PI);
-    if (react.kind === 'jump') corgi.position.y = Math.abs(Math.sin(rp*Math.PI*3))*k*.4;
-    else if (react.kind === 'howl'){ U.head.rotation.x = -k*.48; U.tongue.scale.y = 1.25+k*.7; }
-    else if (react.kind === 'spin') corgi.rotation.y = U.baseRotY + rp*Math.PI*4;
-    else if (react.kind === 'wag'){ U.tail.rotation.z = Math.sin(t*30)*.7*k; corgi.position.y = Math.abs(Math.sin(t*22))*.08*k; }
-    else if (react.kind === 'tilt'){ U.head.rotation.z = k*.55; U.head.rotation.y = -k*.22; }
-    else if (react.kind === 'roll' || react.kind === 'belly'){ corgi.rotation.z = k*.82; corgi.position.y = k*.1; }
-    else if (react.kind === 'toy'){ corgi.position.y = Math.abs(Math.sin(rp*Math.PI*2))*.19; U.tail.rotation.z = Math.sin(t*26)*.56; }
+    switch (react.kind){
+      case 'jump': corgi.position.y = Math.abs(Math.sin(rp*Math.PI*3))*k*.4; break;
+      case 'howl': U.head.rotation.x = .04 - k*.5; U.tongue.scale.y = .95 + k*.8; break;
+      case 'spin': corgi.rotation.y = U.baseRotY + rp*Math.PI*4; break;
+      case 'wag':
+        U.tail.rotation.z = Math.sin(t*32)*.8*k;
+        corgi.position.y = Math.abs(Math.sin(t*22))*.07*k;
+        break;
+      case 'tilt': U.head.rotation.z = k*.55; U.head.rotation.y = -.06 - k*.26; break;
+      case 'belly':
+        corgi.rotation.z = k*.85;
+        corgi.position.y = k*.1;
+        U.frontLegs.forEach(l=>{ l.rotation.x = -k*.7; });
+        break;
+      case 'toy': corgi.position.y = Math.abs(Math.sin(rp*Math.PI*2))*.18; U.tail.rotation.z = Math.sin(t*28)*.6; break;
+      case 'nudge': U.head.rotation.x = .04 + k*.22; U.head.position.z = .26 + k*.1; break;
+    }
   } else if (!rActive){
     corgi.rotation.z += (0-corgi.rotation.z)*.14;
+    U.frontLegs.forEach(l=>{ l.rotation.x += (0-l.rotation.x)*.16; });
+    U.head.position.z += (.26-U.head.position.z)*.14;
   }
   if (!(rActive && react.kind === 'spin')){
-    const d = ((U.baseRotY-corgi.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;
-    corgi.rotation.y += d*.14;
+    const d = ((U.baseRotY - corgi.rotation.y + Math.PI*3) % (Math.PI*2)) - Math.PI;
+    corgi.rotation.y += d*.15;
   }
 
   /* 抱抱 */
+  const manU = human.userData;
+  const chestWorld = human.localToWorld(chestLocal.clone());
   if (hugging){
-    _p.copy(chestLocal); human.localToWorld(_p);
-    corgi.position.lerp(_p, .12);
-    const faceYaw = Math.atan2(camera.position.x-corgi.position.x, camera.position.z-corgi.position.z);
-    const d = ((faceYaw-corgi.rotation.y+Math.PI*3)%(Math.PI*2))-Math.PI;
-    corgi.rotation.y += d*.1;
-    corgi.rotation.z += (.05-corgi.rotation.z)*.1;
-    U.tail.rotation.z = Math.sin(t*18)*.5;
-    U.head.rotation.x = -.08+Math.sin(t*3)*.05;
-    manU.armL.quaternion.slerp(manU.qL, .13);
-    manU.armR.quaternion.slerp(manU.qR, .13);
-    manU.headG.rotation.x += ((.15+Math.sin(t*2.4)*.03)-manU.headG.rotation.x)*.1;
-    heartIdle -= dt*2;
+    corgi.position.lerp(chestWorld, .11);
+    const faceYaw = Math.atan2(camera.position.x - corgi.position.x, camera.position.z - corgi.position.z);
+    let d = ((faceYaw - corgi.rotation.y + Math.PI*3) % (Math.PI*2)) - Math.PI;
+    corgi.rotation.y += d*.11;
+    corgi.rotation.z += (.05 - corgi.rotation.z)*.1;
+    U.tail.rotation.z = Math.sin(t*20)*.55;
+    U.head.rotation.x = .04 - .14 + Math.sin(t*3)*.05;
+    manU.armL.quaternion.slerp(manU.qL, .12);
+    manU.armR.quaternion.slerp(manU.qR, .12);
+    manU.headG.rotation.x += ((.17 + Math.sin(t*2.4)*.03) - manU.headG.rotation.x)*.1;
+    heartIdle -= dt*2.4;
     if (heartIdle <= 0){
-      heartIdle = 1.1;
-      U.head.getWorldPosition(_p); _p.y += .3;
-      spawnHearts(_p, 2);
+      heartIdle = 1.2;
+      const p = new THREE.Vector3();
+      U.head.getWorldPosition(p); p.y += .32;
+      spawnHearts(p, 2);
     }
   } else {
     corgi.position.lerp(U.basePos, .1);
-    manU.armL.quaternion.slerp(_q, .12);
-    manU.armR.quaternion.slerp(_q, .12);
-    manU.headG.rotation.x += ((Math.sin(t*.9)*.04)-manU.headG.rotation.x)*.08;
+    manU.armL.quaternion.slerp(new THREE.Quaternion(), .11);
+    manU.armR.quaternion.slerp(new THREE.Quaternion(), .11);
+    manU.headG.rotation.x += ((Math.sin(t*.9)*.035) - manU.headG.rotation.x)*.08;
   }
-  if (!hugging && !petting && !(rActive && react.who === 'dog')){
-    corgi.position.y += (U.basePos.y-corgi.position.y)*.14;
+  if (!petting && !hugging && !(rActive && react.who === 'dog')){
+    corgi.position.y += (U.basePos.y - corgi.position.y)*.14;
   }
 
   /* 人类反应 */
   if (rActive && react.who === 'human'){
     const k = Math.sin(rp*Math.PI);
-    if (react.kind === 'nod') manU.headG.rotation.x = k*.2;
-    else if (react.kind === 'open'){ manU.armR.quaternion.slerp(manU.qR, .18*k); manU.headG.rotation.x = -k*.08; }
-    else if (react.kind === 'hand'){ manU.armR.userData.hand.position.y = manU.armR.userData.hand0.y+k*.18; manU.headG.rotation.z = k*.1; }
-    else if (react.kind === 'smile'){ manU.cheeks.forEach(c=>{ c.scale.set(1+k*.45,.62+k*.3,.28); }); manU.headG.rotation.z = k*.07; }
-    else if (react.kind === 'lean'){ manU.S.rotation.x = k*.08; manU.headG.rotation.y = k*.18; }
-    else if (react.kind === 'pet'){ manU.armR.userData.hand.position.y = manU.armR.userData.hand0.y-k*.1; U.head.rotation.z = k*.18; }
-    else if (react.kind === 'pat'){ manU.S.position.y = Math.abs(Math.sin(rp*Math.PI*3))*k*.045; }
-    else if (react.kind === 'shy'){ manU.headG.rotation.x = k*.18; manU.cheeks.forEach(c=>{ c.scale.set(1+k*.6,.62+k*.4,.28); }); }
+    switch (react.kind){
+      case 'nod': manU.headG.rotation.x = k*.2; break;
+      case 'open': manU.armR.quaternion.slerp(manU.qR, .2*k); manU.headG.rotation.x = -k*.07; break;
+      case 'hand':
+        manU.armR.userData.hand.position.y = manU.armR.userData.hand0.y + k*.17;
+        manU.headG.rotation.z = k*.09;
+        break;
+      case 'smile':
+        manU.cheeks.forEach(c=>{ c.scale.set(1+k*.5,.62*(1+k*.4),.28); });
+        manU.headG.rotation.z = k*.07;
+        break;
+      case 'lean': manU.S.rotation.x = k*.075; manU.headG.rotation.y = k*.18; break;
+      case 'pet':
+        manU.armR.userData.hand.position.y = manU.armR.userData.hand0.y - k*.12;
+        U.head.rotation.z = k*.18;
+        break;
+      case 'pat': manU.S.position.y = Math.abs(Math.sin(rp*Math.PI*3))*k*.045; break;
+      case 'shy':
+        manU.headG.rotation.x = k*.18;
+        manU.cheeks.forEach(c=>{ c.scale.set(1+k*.75,.62*(1+k*.5),.28); });
+        break;
+    }
   } else {
-    manU.cheeks.forEach(c=>{ c.scale.x += (1-c.scale.x)*.1; c.scale.y += (.62-c.scale.y)*.1; });
+    manU.cheeks.forEach(c=>{
+      c.scale.x += (1-c.scale.x)*.1;
+      c.scale.y += (.62-c.scale.y)*.1;
+    });
     manU.S.rotation.x += (0-manU.S.rotation.x)*.1;
-    manU.S.position.y += (0-manU.S.position.y)*.12;
-    if (!petting) manU.armR.userData.hand.position.y += (manU.armR.userData.hand0.y-manU.armR.userData.hand.position.y)*.12;
     if (!(rActive && react.who === 'human')) manU.headG.rotation.y += (0-manU.headG.rotation.y)*.1;
   }
 
-  /* 环境 */
-  const hb = Math.sin(t*1.4)*.009;
+  /* 呼吸 */
+  const hb = Math.sin(t*1.45)*.0085;
   manU.S.scale.set(1, 1+hb, 1);
-  bulbs.forEach((b,i)=>{
-    const k = .5+.5*Math.sin(t*2.2+i*.8);
-    if (b.userData.warm) b.material.color.setRGB(1,.74+k*.2,.42+k*.3);
-    else b.material.color.setRGB(1,.66+k*.16,.72+k*.18);
-  });
-  motes.forEach(m=>{
-    m.position.y += Math.sin(t*m.userData.sp+m.userData.ph)*dt*.12;
-    m.position.x += Math.cos(t*m.userData.sp*.8+m.userData.ph)*dt*.06;
-  });
-  handH.rotation.z = -(t*.02);
-  handM.rotation.z = -(t*.24);
 
+  /* 串灯 */
+  bulbs.forEach((b,i)=>{
+    const k = .5+.5*Math.sin(t*2.1+i*.75);
+    if (b.userData.warm) b.material.emissiveIntensity = 1.0 + k*1.1;
+    else b.material.emissiveIntensity = .8 + k*.9;
+  });
+
+  /* 浮尘 */
+  motes.forEach(m=>{
+    m.position.y += Math.sin(t*m.userData.sp+m.userData.ph)*dt*.13;
+    m.position.x += Math.cos(t*m.userData.sp*.8+m.userData.ph)*dt*.07;
+  });
+
+  /* 软阴影跟随 */
+  dogShadow.position.set(corgi.position.x, .006, corgi.position.z);
+
+  /* 爱心 */
   for (let i=hearts.length-1;i>=0;i--){
     const h = hearts[i], d = h.userData;
     d.age += dt;
     h.position.y += d.vy*dt;
     h.position.x += d.vx*dt;
     h.material.opacity = Math.max(0, 1-d.age/d.life);
-    h.scale.multiplyScalar(1+dt*.4);
+    h.scale.multiplyScalar(1+dt*.38);
     if (d.age >= d.life){ scene.remove(h); h.material.dispose(); hearts.splice(i,1); }
   }
   if (!hugging){
     heartIdle -= dt;
     if (heartIdle <= 0){
-      heartIdle = 5.5+Math.random()*4;
-      U.head.getWorldPosition(_p); _p.y += .45;
-      spawnHearts(_p, 2);
+      heartIdle = 6+Math.random()*4;
+      const p = new THREE.Vector3();
+      U.head.getWorldPosition(p); p.y += .5;
+      spawnHearts(p, 2);
     }
   }
 
-  placeLabel(tagDog, anchorDog, .1);
-  placeLabel(tagH, anchorH, .06);
-  if (bubble && bubble.classList.contains('on')){
+  placeLabel(tagDog, anchorDog, .18);
+  placeLabel(tagMan, anchorMan, .1);
+
+  if (bubbleEl.classList.contains('on')){
     const obj = bubbleOwner === 'human' ? manU.headG : U.head;
     obj.getWorldPosition(v3);
-    v3.y += bubbleOwner === 'human' ? .95 : .8;
+    v3.y += bubbleOwner === 'human' ? .95 : .78;
     v3.project(camera);
     if (v3.z <= 1){
-      const x = (v3.x*.5+.5)*innerWidth, y = (-v3.y*.5+.5)*innerHeight;
-      bubble.style.transform = 'translate(-50%,-100%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
+      const x = (v3.x*.5+.5)*innerWidth;
+      const y = (-v3.y*.5+.5)*innerHeight;
+      bubbleEl.style.transform = 'translate(-50%,-100%) translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px)';
     }
   }
 
   renderer.render(scene, camera);
 }
-/* 启动兜底：即使后续出错，也不会永远卡在加载页 */
-function bootDone(){
-  const b = document.getElementById('boot');
-  if (b && !b.classList.contains('hide')) b.classList.add('hide');
-}
-function bootFail(msg){
-  const b = document.getElementById('boot');
-  if (b){ b.classList.remove('hide'); b.textContent = msg; }
-}
-setTimeout(bootDone, 6000);
 
-loop();
-bootDone();
+tick();
+document.getElementById('boot').classList.add('hide');
 setTimeout(()=>{
   const p = new THREE.Vector3();
-  corgi.userData.head.getWorldPosition(p); p.y += .45;
+  corgi.userData.head.getWorldPosition(p); p.y += .5;
   spawnHearts(p, 5);
-}, 800);
-</script>
-<script>
-/* 页面级兜底：脚本错误时不再静默卡住 */
-window.addEventListener('error', function(e){
-  var b = document.getElementById('boot');
-  if (b && !b.classList.contains('hide')){
-    b.textContent = '加载出错：' + (e.message || '未知错误');
-  }
-});
-window.addEventListener('unhandledrejection', function(e){
-  var b = document.getElementById('boot');
-  if (b && !b.classList.contains('hide')){
-    b.textContent = '加载出错：' + ((e.reason && e.reason.message) || '未知错误');
-  }
-});
+}, 900);
 </script>
 </body>
 </html>
